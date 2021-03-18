@@ -13,8 +13,8 @@
 				"fileSystem": "test01"
 			},
 			"compression": {
-				"type": "tar",
-				"level": "Fastest"
+				"type": "gzip",
+				"level": "Optimal"
 			}
 		}
 	}
