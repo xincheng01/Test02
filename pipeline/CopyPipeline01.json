@@ -31,10 +31,7 @@
 							"recursive": true
 						},
 						"formatSettings": {
-							"type": "BinaryReadSettings",
-							"compressionProperties": {
-								"type": "TarReadSettings"
-							}
+							"type": "BinaryReadSettings"
 						}
 					},
 					"sink": {
