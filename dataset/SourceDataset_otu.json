@@ -1,0 +1,22 @@
+{
+	"name": "SourceDataset_otu",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "sales.csv",
+				"container": "commonfiles"
+			},
+			"compression": {
+				"type": "GZip",
+				"level": "Fastest"
+			}
+		}
+	}
+}
