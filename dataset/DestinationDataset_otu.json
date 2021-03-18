@@ -11,6 +11,10 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileSystem": "test01"
+			},
+			"compression": {
+				"type": "gzip",
+				"level": "Fastest"
 			}
 		}
 	}
