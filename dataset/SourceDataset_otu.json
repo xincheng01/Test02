@@ -12,10 +12,6 @@
 				"type": "AzureBlobStorageLocation",
 				"fileName": "sales.csv",
 				"container": "commonfiles"
-			},
-			"compression": {
-				"type": "GZip",
-				"level": "Fastest"
 			}
 		}
 	}
