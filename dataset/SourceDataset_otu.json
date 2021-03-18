@@ -14,8 +14,8 @@
 				"container": "commonfiles"
 			},
 			"compression": {
-				"type": "tar",
-				"level": "Fastest"
+				"type": "gzip",
+				"level": "Optimal"
 			}
 		}
 	}
