@@ -1,5 +1,5 @@
 {
-	"name": "DWLoadTest01",
+	"name": "ETL_Test01",
 	"properties": {
 		"activities": [
 			{
@@ -16,6 +16,33 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": "/Users/zhang_xincheng8@hotmail.com/ETL-DimensionData-Test01"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Fact_To_SQL_DWH",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Storage_to_DWH",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/zhang_xincheng8@hotmail.com/FactDataTransformation"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricks1",
