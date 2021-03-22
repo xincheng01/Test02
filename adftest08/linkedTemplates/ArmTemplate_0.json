@@ -812,7 +812,7 @@
 											},
 											"recordModifedtime": {
 												"value": "@{activity('LookupNewwatermark').output.firstrow.NewWatermarkvalue}",
-												"type": "Datetimeoffset"
+												"type": "Datetime"
 											}
 										}
 									},
