@@ -808,7 +808,7 @@
 													"value": "@{activity('LookupNewwatermark').output.firstrow.NewWatermarkvalue}",
 													"type": "Expression"
 												},
-												"type": "Datetime"
+												"type": "String"
 											},
 											"tablename": {
 												"value": {
