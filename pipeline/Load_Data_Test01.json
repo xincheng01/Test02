@@ -175,7 +175,7 @@
 							}
 						},
 						{
-							"name": "UpdateConfgTable",
+							"name": "Email",
 							"type": "WebActivity",
 							"dependsOn": [
 								{
