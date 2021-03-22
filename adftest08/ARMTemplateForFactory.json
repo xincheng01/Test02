@@ -388,16 +388,13 @@
 									"typeProperties": {
 										"storedProcedureName": "[[dbo].[spupdatewatermark]",
 										"storedProcedureParameters": {
-											"tablename": {
-												"value": {
-													"value": "@{activity('LookupOldwatermark').output.firstrow.Table_Name}",
-													"type": "Expression"
-												},
+											"RecordModifiedtime": {
+												"value": "@{activity('LookupNewwatermark').output.firstrow.NewWatermarkvalue}\n",
 												"type": "String"
 											},
-											"recordModifedtime": {
-												"value": "@{activity('LookupNewwatermark').output.firstrow.NewWatermarkvalue}",
-												"type": "Datetime"
+											"TableName": {
+												"value": "@{activity('LookupOldwatermark').output.firstrow.Table_Name}",
+												"type": "String"
 											}
 										}
 									},
