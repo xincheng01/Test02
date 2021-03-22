@@ -394,6 +394,10 @@
 													"type": "Expression"
 												},
 												"type": "String"
+											},
+											"recordModifedtime": {
+												"value": "@{activity('LookupNewwatermark').output.firstrow.NewWatermarkvalue}",
+												"type": "Datetime"
 											}
 										}
 									},
