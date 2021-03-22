@@ -816,42 +816,42 @@
 										"referenceName": "AzureSqlDatabase1",
 										"type": "LinkedServiceReference"
 									}
-								},
-								{
-									"name": "Email",
-									"type": "WebActivity",
-									"dependsOn": [
-										{
-											"activity": "UpdateConfigTable",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"url": "https://prod-08.australiaeast.logic.azure.com:443/workflows/9093f01847c54be485c73b4fb10ad59f/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=swQIZL7qJ0skQNwuHRx1ToXnWuB7LAlOWWr7VfUd2Cs",
-										"method": "POST",
-										"headers": {
-											"Content-Type": "application/json"
-										},
-										"body": {
-											"DataFactoryName": "@{pipeline().DataFactory}",
-											"PipelineName": "@{pipeline().Pipeline}",
-											"Subject": "Pipeline finished!",
-											"ErrorMessage": "Everything is okey-dokey!",
-											"EmailTo": "zhang_xincheng8@hotmail.com"
-										}
-									}
 								}
 							]
+						}
+					},
+					{
+						"name": "Email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "ForEachSourceTable",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-08.australiaeast.logic.azure.com:443/workflows/9093f01847c54be485c73b4fb10ad59f/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=swQIZL7qJ0skQNwuHRx1ToXnWuB7LAlOWWr7VfUd2Cs",
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/json"
+							},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "Pipeline finished!",
+								"ErrorMessage": "Everything is okey-dokey!",
+								"EmailTo": "zhang_xincheng8@hotmail.com"
+							}
 						}
 					}
 				],
