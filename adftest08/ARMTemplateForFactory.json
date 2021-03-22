@@ -390,14 +390,14 @@
 										"storedProcedureParameters": {
 											"recordModifedtime": {
 												"value": {
-													"value": "@{activity('lookupnewwatermark').output.frstrow.newwatermarkvalue}",
+													"value": "@{activity('LookupNewwatermark').output.firstrow.NewWatermarkvalue}",
 													"type": "Expression"
 												},
 												"type": "Datetime"
 											},
 											"tablename": {
 												"value": {
-													"value": "@{activity('lookupoldwatermark').output.frstrow.table_name}",
+													"value": "@{activity('LookupOldwatermark').output.firstrow.Table_Name}",
 													"type": "Expression"
 												},
 												"type": "String"
