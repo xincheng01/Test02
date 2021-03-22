@@ -253,7 +253,7 @@
 										"source": {
 											"type": "AzureSqlSource",
 											"sqlReaderQuery": {
-												"value": "select MAX(RecordModifiedDate) as\nNewWatermarkvalue from @{item().TABLE_NAME}",
+												"value": "select MAX(@{item().WaterMark_Column}) as\nNewWatermarkvalue from @{item().TABLE_NAME}",
 												"type": "Expression"
 											},
 											"queryTimeout": "02:00:00",
@@ -388,13 +388,6 @@
 									"typeProperties": {
 										"storedProcedureName": "[[dbo].[spupdatewatermark]",
 										"storedProcedureParameters": {
-											"recordModifedtime": {
-												"value": {
-													"value": "@{activity('LookupNewwatermark').output.firstrow.NewWatermarkvalue}",
-													"type": "Expression"
-												},
-												"type": "String"
-											},
 											"tablename": {
 												"value": {
 													"value": "@{activity('LookupOldwatermark').output.firstrow.Table_Name}",
