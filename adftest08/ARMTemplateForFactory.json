@@ -389,8 +389,8 @@
 										"storedProcedureName": "[[dbo].[spupdatewatermark]",
 										"storedProcedureParameters": {
 											"RecordModifiedtime": {
-												"value": "@{activity('LookupNewwatermark').output.firstrow.NewWatermarkvalue}\n",
-												"type": "String"
+												"value": "@formatDateTime(activity('LookupNewwatermark').output.firstrow.NewWatermarkvalue)\n",
+												"type": "Datetime"
 											},
 											"TableName": {
 												"value": "@{activity('LookupOldwatermark').output.firstrow.Table_Name}",
