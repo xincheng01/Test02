@@ -1,0 +1,456 @@
+{
+	"name": "ADLdataset01",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "sales.csv",
+				"fileSystem": "test01"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ProductCategoryKey",
+				"type": "String"
+			},
+			{
+				"name": "ProductSubcategoryKey",
+				"type": "String"
+			},
+			{
+				"name": "SalesTerritoryKey",
+				"type": "String"
+			},
+			{
+				"name": "GeographyKey",
+				"type": "String"
+			},
+			{
+				"name": "CustomerKey",
+				"type": "String"
+			},
+			{
+				"name": "ProductKey",
+				"type": "String"
+			},
+			{
+				"name": "CurrencyKey",
+				"type": "String"
+			},
+			{
+				"name": "OrderDateKey",
+				"type": "String"
+			},
+			{
+				"name": "DueDateKey",
+				"type": "String"
+			},
+			{
+				"name": "ShipDateKey",
+				"type": "String"
+			},
+			{
+				"name": "PromotionKey",
+				"type": "String"
+			},
+			{
+				"name": "SalesOrderNumber",
+				"type": "String"
+			},
+			{
+				"name": "SalesOrderLineNumber",
+				"type": "String"
+			},
+			{
+				"name": "RevisionNumber",
+				"type": "String"
+			},
+			{
+				"name": "OrderQuantity",
+				"type": "String"
+			},
+			{
+				"name": "UnitPrice",
+				"type": "String"
+			},
+			{
+				"name": "ExtendedAmount",
+				"type": "String"
+			},
+			{
+				"name": "UnitPriceDiscountPct",
+				"type": "String"
+			},
+			{
+				"name": "DiscountAmount",
+				"type": "String"
+			},
+			{
+				"name": "ProductStandardCost",
+				"type": "String"
+			},
+			{
+				"name": "TotalProductCost",
+				"type": "String"
+			},
+			{
+				"name": "SalesAmount",
+				"type": "String"
+			},
+			{
+				"name": "TaxAmt",
+				"type": "String"
+			},
+			{
+				"name": "Freight",
+				"type": "String"
+			},
+			{
+				"name": "CarrierTrackingNumber",
+				"type": "String"
+			},
+			{
+				"name": "CustomerPONumber",
+				"type": "String"
+			},
+			{
+				"name": "CurrencyAlternateKey",
+				"type": "String"
+			},
+			{
+				"name": "CurrencyName",
+				"type": "String"
+			},
+			{
+				"name": "SalesTerritoryAlternateKey",
+				"type": "String"
+			},
+			{
+				"name": "SalesTerritoryRegion",
+				"type": "String"
+			},
+			{
+				"name": "SalesTerritoryCountry",
+				"type": "String"
+			},
+			{
+				"name": "SalesTerritoryGroup",
+				"type": "String"
+			},
+			{
+				"name": "ProductAlternateKey",
+				"type": "String"
+			},
+			{
+				"name": "WeightUnitMeasureCode",
+				"type": "String"
+			},
+			{
+				"name": "SizeUnitMeasureCode",
+				"type": "String"
+			},
+			{
+				"name": "EnglishProductName",
+				"type": "String"
+			},
+			{
+				"name": "SpanishProductName",
+				"type": "String"
+			},
+			{
+				"name": "FrenchProductName",
+				"type": "String"
+			},
+			{
+				"name": "StandardCost",
+				"type": "String"
+			},
+			{
+				"name": "FinishedGoodsFlag",
+				"type": "String"
+			},
+			{
+				"name": "Color",
+				"type": "String"
+			},
+			{
+				"name": "SafetyStockLevel",
+				"type": "String"
+			},
+			{
+				"name": "ReorderPoint",
+				"type": "String"
+			},
+			{
+				"name": "ListPrice",
+				"type": "String"
+			},
+			{
+				"name": "Size",
+				"type": "String"
+			},
+			{
+				"name": "SizeRange",
+				"type": "String"
+			},
+			{
+				"name": "Weight",
+				"type": "String"
+			},
+			{
+				"name": "DaysToManufacture",
+				"type": "String"
+			},
+			{
+				"name": "ProductLine",
+				"type": "String"
+			},
+			{
+				"name": "DealerPrice",
+				"type": "String"
+			},
+			{
+				"name": "Class",
+				"type": "String"
+			},
+			{
+				"name": "Style",
+				"type": "String"
+			},
+			{
+				"name": "ModelName",
+				"type": "String"
+			},
+			{
+				"name": "EnglishDescription",
+				"type": "String"
+			},
+			{
+				"name": "FrenchDescription",
+				"type": "String"
+			},
+			{
+				"name": "ChineseDescription",
+				"type": "String"
+			},
+			{
+				"name": "ArabicDescription",
+				"type": "String"
+			},
+			{
+				"name": "HebrewDescription",
+				"type": "String"
+			},
+			{
+				"name": "ThaiDescription",
+				"type": "String"
+			},
+			{
+				"name": "GermanDescription",
+				"type": "String"
+			},
+			{
+				"name": "JapaneseDescription",
+				"type": "String"
+			},
+			{
+				"name": "TurkishDescription",
+				"type": "String"
+			},
+			{
+				"name": "StartDate",
+				"type": "String"
+			},
+			{
+				"name": "EndDate",
+				"type": "String"
+			},
+			{
+				"name": "Status",
+				"type": "String"
+			},
+			{
+				"name": "CustomerAlternateKey",
+				"type": "String"
+			},
+			{
+				"name": "Title",
+				"type": "String"
+			},
+			{
+				"name": "FirstName",
+				"type": "String"
+			},
+			{
+				"name": "MiddleName",
+				"type": "String"
+			},
+			{
+				"name": "LastName",
+				"type": "String"
+			},
+			{
+				"name": "NameStyle",
+				"type": "String"
+			},
+			{
+				"name": "BirthDate",
+				"type": "String"
+			},
+			{
+				"name": "MaritalStatus",
+				"type": "String"
+			},
+			{
+				"name": "Suffix",
+				"type": "String"
+			},
+			{
+				"name": "Gender",
+				"type": "String"
+			},
+			{
+				"name": "EmailAddress",
+				"type": "String"
+			},
+			{
+				"name": "YearlyIncome",
+				"type": "String"
+			},
+			{
+				"name": "TotalChildren",
+				"type": "String"
+			},
+			{
+				"name": "NumberChildrenAtHome",
+				"type": "String"
+			},
+			{
+				"name": "EnglishEducation",
+				"type": "String"
+			},
+			{
+				"name": "SpanishEducation",
+				"type": "String"
+			},
+			{
+				"name": "FrenchEducation",
+				"type": "String"
+			},
+			{
+				"name": "EnglishOccupation",
+				"type": "String"
+			},
+			{
+				"name": "SpanishOccupation",
+				"type": "String"
+			},
+			{
+				"name": "FrenchOccupation",
+				"type": "String"
+			},
+			{
+				"name": "HouseOwnerFlag",
+				"type": "String"
+			},
+			{
+				"name": "NumberCarsOwned",
+				"type": "String"
+			},
+			{
+				"name": "AddressLine1",
+				"type": "String"
+			},
+			{
+				"name": "AddressLine2",
+				"type": "String"
+			},
+			{
+				"name": "Phone",
+				"type": "String"
+			},
+			{
+				"name": "DateFirstPurchase",
+				"type": "String"
+			},
+			{
+				"name": "CommuteDistance",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "StateProvinceCode",
+				"type": "String"
+			},
+			{
+				"name": "StateProvinceName",
+				"type": "String"
+			},
+			{
+				"name": "CountryRegionCode",
+				"type": "String"
+			},
+			{
+				"name": "EnglishCountryRegionName",
+				"type": "String"
+			},
+			{
+				"name": "SpanishCountryRegionName",
+				"type": "String"
+			},
+			{
+				"name": "FrenchCountryRegionName",
+				"type": "String"
+			},
+			{
+				"name": "PostalCode",
+				"type": "String"
+			},
+			{
+				"name": "ProductSubcategoryAlternateKey",
+				"type": "String"
+			},
+			{
+				"name": "EnglishProductSubcategoryName",
+				"type": "String"
+			},
+			{
+				"name": "SpanishProductSubcategoryName",
+				"type": "String"
+			},
+			{
+				"name": "FrenchProductSubcategoryName",
+				"type": "String"
+			},
+			{
+				"name": "ProductCategoryAlternateKey",
+				"type": "String"
+			},
+			{
+				"name": "EnglishProductCategoryName",
+				"type": "String"
+			},
+			{
+				"name": "SpanishProductCategoryName",
+				"type": "String"
+			},
+			{
+				"name": "FrenchProductCategoryName",
+				"type": "String"
+			}
+		]
+	}
+}
