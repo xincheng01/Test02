@@ -111,6 +111,102 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/MySelfHostedIR')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MySampleAzureIR')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "AutoResolve",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 10
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Databricks02')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Load Azure Synapse Analyse",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/zhang_xincheng8@hotmail.com/synapse/1.Azure-Synapse-Analytics"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks1",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Email",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Load Azure Synapse Analyse",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://prod-08.australiaeast.logic.azure.com:443/workflows/9093f01847c54be485c73b4fb10ad59f/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=swQIZL7qJ0skQNwuHRx1ToXnWuB7LAlOWWr7VfUd2Cs",
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/json"
+							},
+							"body": {
+								"DataFactoryName": "@{pipeline().DataFactory}",
+								"PipelineName": "@{pipeline().Pipeline}",
+								"Subject": "Pipeline finished!",
+								"ErrorMessage": "Everything is okey-dokey!",
+								"EmailTo": "zhang_xincheng8@hotmail.com"
+							}
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ETL_Test01')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -451,6 +547,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"fileName": "sales.csv",
 						"container": "commonfiles"
 					},
 					"columnDelimiter": ",",
@@ -514,6 +611,32 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_eoh')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "test01"
+					},
+					"compression": {
+						"type": "GZip",
+						"level": "Optimal"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DestinationDataset_otu')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -537,6 +660,33 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_eoh')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "sales.csv",
+						"container": "commonfiles"
+					},
+					"compression": {
+						"type": "GZip",
+						"level": "Optimal"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
 		{
@@ -564,377 +714,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Databricks02')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Load Azure Synapse Analyse",
-						"type": "DatabricksNotebook",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": "/Users/zhang_xincheng8@hotmail.com/synapse/1.Azure-Synapse-Analytics"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureDatabricks1",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Load Azure Synapse Analyse",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-08.australiaeast.logic.azure.com:443/workflows/9093f01847c54be485c73b4fb10ad59f/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=swQIZL7qJ0skQNwuHRx1ToXnWuB7LAlOWWr7VfUd2Cs",
-							"method": "POST",
-							"headers": {
-								"Content-Type": "application/json"
-							},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "Pipeline finished!",
-								"ErrorMessage": "Everything is okey-dokey!",
-								"EmailTo": "zhang_xincheng8@hotmail.com"
-							}
-						}
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyPipeline01')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy_otu",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "commonfiles//sales.csv"
-							},
-							{
-								"name": "Destination",
-								"value": "test01//"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
-								}
-							},
-							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								}
-							},
-							"enableStaging": false
-						},
-						"inputs": [
-							{
-								"referenceName": "SourceDataset_otu",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_otu",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_otu')]",
-				"[concat(variables('factoryId'), '/datasets/DestinationDataset_otu')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Load_Data_Test01')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ForEachSourceTable",
-						"type": "ForEach",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@pipeline().parameters.tablenames",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "LookupNewwatermark",
-									"type": "Lookup",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "AzureSqlSource",
-											"sqlReaderQuery": {
-												"value": "select MAX(@{item().WaterMark_Column}) as\nNewWatermarkvalue from @{item().TABLE_NAME}",
-												"type": "Expression"
-											},
-											"queryTimeout": "02:00:00",
-											"partitionOption": "None"
-										},
-										"dataset": {
-											"referenceName": "AzureSqlTable2",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									}
-								},
-								{
-									"name": "LookupOldwatermark",
-									"type": "Lookup",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "AzureSqlSource",
-											"sqlReaderQuery": {
-												"value": "select Table_Name, WatermarkValue from Config where\nTable_Name = '@{item().TABLE_NAME}'",
-												"type": "Expression"
-											},
-											"queryTimeout": "02:00:00",
-											"partitionOption": "None"
-										},
-										"dataset": {
-											"referenceName": "AzureSqlTable2",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									}
-								},
-								{
-									"name": "getData",
-									"type": "Copy",
-									"dependsOn": [
-										{
-											"activity": "LookupNewwatermark",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										},
-										{
-											"activity": "LookupOldwatermark",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "AzureSqlSource",
-											"sqlReaderQuery": {
-												"value": "select * from @{item().TABLE_NAME} where @{item().\nWaterMark_Column} > '@{activity('LookupOldwatermark').\noutput.firstRow.WatermarkValue}' and @{item().\nWaterMark_Column} <= '@{activity('LookupNewwatermark').\noutput.firstRow.NewWatermarkvalue}'",
-												"type": "Expression"
-											},
-											"queryTimeout": "02:00:00",
-											"partitionOption": "None"
-										},
-										"sink": {
-											"type": "DelimitedTextSink",
-											"storeSettings": {
-												"type": "AzureBlobStorageWriteSettings"
-											},
-											"formatSettings": {
-												"type": "DelimitedTextWriteSettings",
-												"quoteAllText": true,
-												"fileExtension": ".txt"
-											}
-										},
-										"enableStaging": false,
-										"translator": {
-											"type": "TabularTranslator",
-											"typeConversion": true,
-											"typeConversionSettings": {
-												"allowDataTruncation": true,
-												"treatBooleanAsNumber": false
-											}
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "AzureSqlTable1",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "DelimitedText1",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									]
-								},
-								{
-									"name": "UpdateConfigTable",
-									"type": "SqlServerStoredProcedure",
-									"dependsOn": [
-										{
-											"activity": "getData",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"storedProcedureName": "[[dbo].[spupdatewatermark]",
-										"storedProcedureParameters": {
-											"RecordModifiedtime": {
-												"value": "@formatDateTime(activity('LookupNewwatermark').output.firstrow.NewWatermarkvalue)\n",
-												"type": "Datetime"
-											},
-											"TableName": {
-												"value": "@{activity('LookupOldwatermark').output.firstrow.Table_Name}",
-												"type": "String"
-											}
-										}
-									},
-									"linkedServiceName": {
-										"referenceName": "AzureSqlDatabase1",
-										"type": "LinkedServiceReference"
-									}
-								}
-							]
-						}
-					},
-					{
-						"name": "Email",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "ForEachSourceTable",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "https://prod-08.australiaeast.logic.azure.com:443/workflows/9093f01847c54be485c73b4fb10ad59f/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=swQIZL7qJ0skQNwuHRx1ToXnWuB7LAlOWWr7VfUd2Cs",
-							"method": "POST",
-							"headers": {
-								"Content-Type": "application/json"
-							},
-							"body": {
-								"DataFactoryName": "@{pipeline().DataFactory}",
-								"PipelineName": "@{pipeline().Pipeline}",
-								"Subject": "Pipeline finished!",
-								"ErrorMessage": "Everything is okey-dokey!",
-								"EmailTo": "zhang_xincheng8@hotmail.com"
-							}
-						}
-					}
-				],
-				"parameters": {
-					"tablenames": {
-						"type": "array"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable2')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable1')]",
-				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
 			]
 		}
 	]

@@ -1,0 +1,776 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adftest08"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Copy data from Data blob to Data Lake')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_eoh",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "commonfiles//sales.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "test01//"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_eoh",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_eoh",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_eoh')]",
+				"[concat(variables('factoryId'), '/datasets/DestinationDataset_eoh')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "sales.csv",
+						"container": "commonfiles"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_eoh')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "test01"
+					},
+					"compression": {
+						"type": "GZip",
+						"level": "Optimal"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_eoh')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "sales.csv",
+						"container": "commonfiles"
+					},
+					"compression": {
+						"type": "GZip",
+						"level": "Optimal"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "ADLdataset01",
+								"type": "DatasetReference"
+							},
+							"name": "adlsource1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSynapseAnalyticsTable1",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Select1"
+						},
+						{
+							"name": "DerivedColumn1"
+						},
+						{
+							"name": "Filter1"
+						},
+						{
+							"name": "Aggregate1"
+						}
+					],
+					"script": "source(output(\n\t\tProductCategoryKey as string,\n\t\tProductSubcategoryKey as string,\n\t\tSalesTerritoryKey as string,\n\t\tGeographyKey as string,\n\t\tCustomerKey as string,\n\t\tProductKey as string,\n\t\tCurrencyKey as string,\n\t\tOrderDateKey as string,\n\t\tDueDateKey as string,\n\t\tShipDateKey as string,\n\t\tPromotionKey as string,\n\t\tSalesOrderNumber as string,\n\t\tSalesOrderLineNumber as string,\n\t\tRevisionNumber as string,\n\t\tOrderQuantity as string,\n\t\tUnitPrice as string,\n\t\tExtendedAmount as string,\n\t\tUnitPriceDiscountPct as string,\n\t\tDiscountAmount as string,\n\t\tProductStandardCost as string,\n\t\tTotalProductCost as string,\n\t\tSalesAmount as string,\n\t\tTaxAmt as string,\n\t\tFreight as string,\n\t\tCarrierTrackingNumber as string,\n\t\tCustomerPONumber as string,\n\t\tCurrencyAlternateKey as string,\n\t\tCurrencyName as string,\n\t\tSalesTerritoryAlternateKey as string,\n\t\tSalesTerritoryRegion as string,\n\t\tSalesTerritoryCountry as string,\n\t\tSalesTerritoryGroup as string,\n\t\tProductAlternateKey as string,\n\t\tWeightUnitMeasureCode as string,\n\t\tSizeUnitMeasureCode as string,\n\t\tEnglishProductName as string,\n\t\tSpanishProductName as string,\n\t\tFrenchProductName as string,\n\t\tStandardCost as string,\n\t\tFinishedGoodsFlag as string,\n\t\tColor as string,\n\t\tSafetyStockLevel as string,\n\t\tReorderPoint as string,\n\t\tListPrice as string,\n\t\tSize as string,\n\t\tSizeRange as string,\n\t\tWeight as string,\n\t\tDaysToManufacture as string,\n\t\tProductLine as string,\n\t\tDealerPrice as string,\n\t\tClass as string,\n\t\tStyle as string,\n\t\tModelName as string,\n\t\tEnglishDescription as string,\n\t\tFrenchDescription as string,\n\t\tChineseDescription as string,\n\t\tArabicDescription as string,\n\t\tHebrewDescription as string,\n\t\tThaiDescription as string,\n\t\tGermanDescription as string,\n\t\tJapaneseDescription as string,\n\t\tTurkishDescription as string,\n\t\tStartDate as string,\n\t\tEndDate as string,\n\t\tStatus as string,\n\t\tCustomerAlternateKey as string,\n\t\tTitle as string,\n\t\tFirstName as string,\n\t\tMiddleName as string,\n\t\tLastName as string,\n\t\tNameStyle as string,\n\t\tBirthDate as string,\n\t\tMaritalStatus as string,\n\t\tSuffix as string,\n\t\tGender as string,\n\t\tEmailAddress as string,\n\t\tYearlyIncome as string,\n\t\tTotalChildren as string,\n\t\tNumberChildrenAtHome as string,\n\t\tEnglishEducation as string,\n\t\tSpanishEducation as string,\n\t\tFrenchEducation as string,\n\t\tEnglishOccupation as string,\n\t\tSpanishOccupation as string,\n\t\tFrenchOccupation as string,\n\t\tHouseOwnerFlag as string,\n\t\tNumberCarsOwned as string,\n\t\tAddressLine1 as string,\n\t\tAddressLine2 as string,\n\t\tPhone as string,\n\t\tDateFirstPurchase as string,\n\t\tCommuteDistance as string,\n\t\tCity as string,\n\t\tStateProvinceCode as string,\n\t\tStateProvinceName as string,\n\t\tCountryRegionCode as string,\n\t\tEnglishCountryRegionName as string,\n\t\tSpanishCountryRegionName as string,\n\t\tFrenchCountryRegionName as string,\n\t\tPostalCode as string,\n\t\tProductSubcategoryAlternateKey as string,\n\t\tEnglishProductSubcategoryName as string,\n\t\tSpanishProductSubcategoryName as string,\n\t\tFrenchProductSubcategoryName as string,\n\t\tProductCategoryAlternateKey as string,\n\t\tEnglishProductCategoryName as string,\n\t\tSpanishProductCategoryName as string,\n\t\tFrenchProductCategoryName as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tlimit: 200) ~> adlsource1\nadlsource1 select(mapColumn(\n\t\tSalesTerritoryKey,\n\t\tCategoryName = EnglishProductCategoryName,\n\t\tCustomerKey,\n\t\tProductKey,\n\t\tEducation = EnglishEducation,\n\t\tOrderDateKey,\n\t\tSalesTerritoryGroup,\n\t\tShipDateKey,\n\t\tOrderQuantity,\n\t\tUnitPrice,\n\t\tExtendedAmount,\n\t\tUnitPriceDiscountPct,\n\t\tDiscountAmount,\n\t\tProductStandardCost,\n\t\tTotalProductCost,\n\t\tSalesAmount,\n\t\tTaxAmt\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive(SalesTerritoryKey = toInteger(SalesTerritoryKey),\n\t\tOrderDateKey = left(OrderDateKey,4)) ~> DerivedColumn1\nDerivedColumn1 filter(toInteger(OrderDateKey) > 2002) ~> Filter1\nFilter1 aggregate(groupBy(CategoryName,\n\t\tEducation,\n\t\tOrderDateKey),\n\tFirstProduct = first(ProductKey),\n\t\tFirstShipDate = first(ShipDateKey),\n\t\tCountNumber = count(),\n\t\tTotalSales = sum(toInteger(SalesAmount))) ~> Aggregate1\nAggregate1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\ttruncate:true,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ADLdataset01')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSynapseAnalyticsTable1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ADLdataset01')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "sales.csv",
+						"fileSystem": "test01"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ProductCategoryKey",
+						"type": "String"
+					},
+					{
+						"name": "ProductSubcategoryKey",
+						"type": "String"
+					},
+					{
+						"name": "SalesTerritoryKey",
+						"type": "String"
+					},
+					{
+						"name": "GeographyKey",
+						"type": "String"
+					},
+					{
+						"name": "CustomerKey",
+						"type": "String"
+					},
+					{
+						"name": "ProductKey",
+						"type": "String"
+					},
+					{
+						"name": "CurrencyKey",
+						"type": "String"
+					},
+					{
+						"name": "OrderDateKey",
+						"type": "String"
+					},
+					{
+						"name": "DueDateKey",
+						"type": "String"
+					},
+					{
+						"name": "ShipDateKey",
+						"type": "String"
+					},
+					{
+						"name": "PromotionKey",
+						"type": "String"
+					},
+					{
+						"name": "SalesOrderNumber",
+						"type": "String"
+					},
+					{
+						"name": "SalesOrderLineNumber",
+						"type": "String"
+					},
+					{
+						"name": "RevisionNumber",
+						"type": "String"
+					},
+					{
+						"name": "OrderQuantity",
+						"type": "String"
+					},
+					{
+						"name": "UnitPrice",
+						"type": "String"
+					},
+					{
+						"name": "ExtendedAmount",
+						"type": "String"
+					},
+					{
+						"name": "UnitPriceDiscountPct",
+						"type": "String"
+					},
+					{
+						"name": "DiscountAmount",
+						"type": "String"
+					},
+					{
+						"name": "ProductStandardCost",
+						"type": "String"
+					},
+					{
+						"name": "TotalProductCost",
+						"type": "String"
+					},
+					{
+						"name": "SalesAmount",
+						"type": "String"
+					},
+					{
+						"name": "TaxAmt",
+						"type": "String"
+					},
+					{
+						"name": "Freight",
+						"type": "String"
+					},
+					{
+						"name": "CarrierTrackingNumber",
+						"type": "String"
+					},
+					{
+						"name": "CustomerPONumber",
+						"type": "String"
+					},
+					{
+						"name": "CurrencyAlternateKey",
+						"type": "String"
+					},
+					{
+						"name": "CurrencyName",
+						"type": "String"
+					},
+					{
+						"name": "SalesTerritoryAlternateKey",
+						"type": "String"
+					},
+					{
+						"name": "SalesTerritoryRegion",
+						"type": "String"
+					},
+					{
+						"name": "SalesTerritoryCountry",
+						"type": "String"
+					},
+					{
+						"name": "SalesTerritoryGroup",
+						"type": "String"
+					},
+					{
+						"name": "ProductAlternateKey",
+						"type": "String"
+					},
+					{
+						"name": "WeightUnitMeasureCode",
+						"type": "String"
+					},
+					{
+						"name": "SizeUnitMeasureCode",
+						"type": "String"
+					},
+					{
+						"name": "EnglishProductName",
+						"type": "String"
+					},
+					{
+						"name": "SpanishProductName",
+						"type": "String"
+					},
+					{
+						"name": "FrenchProductName",
+						"type": "String"
+					},
+					{
+						"name": "StandardCost",
+						"type": "String"
+					},
+					{
+						"name": "FinishedGoodsFlag",
+						"type": "String"
+					},
+					{
+						"name": "Color",
+						"type": "String"
+					},
+					{
+						"name": "SafetyStockLevel",
+						"type": "String"
+					},
+					{
+						"name": "ReorderPoint",
+						"type": "String"
+					},
+					{
+						"name": "ListPrice",
+						"type": "String"
+					},
+					{
+						"name": "Size",
+						"type": "String"
+					},
+					{
+						"name": "SizeRange",
+						"type": "String"
+					},
+					{
+						"name": "Weight",
+						"type": "String"
+					},
+					{
+						"name": "DaysToManufacture",
+						"type": "String"
+					},
+					{
+						"name": "ProductLine",
+						"type": "String"
+					},
+					{
+						"name": "DealerPrice",
+						"type": "String"
+					},
+					{
+						"name": "Class",
+						"type": "String"
+					},
+					{
+						"name": "Style",
+						"type": "String"
+					},
+					{
+						"name": "ModelName",
+						"type": "String"
+					},
+					{
+						"name": "EnglishDescription",
+						"type": "String"
+					},
+					{
+						"name": "FrenchDescription",
+						"type": "String"
+					},
+					{
+						"name": "ChineseDescription",
+						"type": "String"
+					},
+					{
+						"name": "ArabicDescription",
+						"type": "String"
+					},
+					{
+						"name": "HebrewDescription",
+						"type": "String"
+					},
+					{
+						"name": "ThaiDescription",
+						"type": "String"
+					},
+					{
+						"name": "GermanDescription",
+						"type": "String"
+					},
+					{
+						"name": "JapaneseDescription",
+						"type": "String"
+					},
+					{
+						"name": "TurkishDescription",
+						"type": "String"
+					},
+					{
+						"name": "StartDate",
+						"type": "String"
+					},
+					{
+						"name": "EndDate",
+						"type": "String"
+					},
+					{
+						"name": "Status",
+						"type": "String"
+					},
+					{
+						"name": "CustomerAlternateKey",
+						"type": "String"
+					},
+					{
+						"name": "Title",
+						"type": "String"
+					},
+					{
+						"name": "FirstName",
+						"type": "String"
+					},
+					{
+						"name": "MiddleName",
+						"type": "String"
+					},
+					{
+						"name": "LastName",
+						"type": "String"
+					},
+					{
+						"name": "NameStyle",
+						"type": "String"
+					},
+					{
+						"name": "BirthDate",
+						"type": "String"
+					},
+					{
+						"name": "MaritalStatus",
+						"type": "String"
+					},
+					{
+						"name": "Suffix",
+						"type": "String"
+					},
+					{
+						"name": "Gender",
+						"type": "String"
+					},
+					{
+						"name": "EmailAddress",
+						"type": "String"
+					},
+					{
+						"name": "YearlyIncome",
+						"type": "String"
+					},
+					{
+						"name": "TotalChildren",
+						"type": "String"
+					},
+					{
+						"name": "NumberChildrenAtHome",
+						"type": "String"
+					},
+					{
+						"name": "EnglishEducation",
+						"type": "String"
+					},
+					{
+						"name": "SpanishEducation",
+						"type": "String"
+					},
+					{
+						"name": "FrenchEducation",
+						"type": "String"
+					},
+					{
+						"name": "EnglishOccupation",
+						"type": "String"
+					},
+					{
+						"name": "SpanishOccupation",
+						"type": "String"
+					},
+					{
+						"name": "FrenchOccupation",
+						"type": "String"
+					},
+					{
+						"name": "HouseOwnerFlag",
+						"type": "String"
+					},
+					{
+						"name": "NumberCarsOwned",
+						"type": "String"
+					},
+					{
+						"name": "AddressLine1",
+						"type": "String"
+					},
+					{
+						"name": "AddressLine2",
+						"type": "String"
+					},
+					{
+						"name": "Phone",
+						"type": "String"
+					},
+					{
+						"name": "DateFirstPurchase",
+						"type": "String"
+					},
+					{
+						"name": "CommuteDistance",
+						"type": "String"
+					},
+					{
+						"name": "City",
+						"type": "String"
+					},
+					{
+						"name": "StateProvinceCode",
+						"type": "String"
+					},
+					{
+						"name": "StateProvinceName",
+						"type": "String"
+					},
+					{
+						"name": "CountryRegionCode",
+						"type": "String"
+					},
+					{
+						"name": "EnglishCountryRegionName",
+						"type": "String"
+					},
+					{
+						"name": "SpanishCountryRegionName",
+						"type": "String"
+					},
+					{
+						"name": "FrenchCountryRegionName",
+						"type": "String"
+					},
+					{
+						"name": "PostalCode",
+						"type": "String"
+					},
+					{
+						"name": "ProductSubcategoryAlternateKey",
+						"type": "String"
+					},
+					{
+						"name": "EnglishProductSubcategoryName",
+						"type": "String"
+					},
+					{
+						"name": "SpanishProductSubcategoryName",
+						"type": "String"
+					},
+					{
+						"name": "FrenchProductSubcategoryName",
+						"type": "String"
+					},
+					{
+						"name": "ProductCategoryAlternateKey",
+						"type": "String"
+					},
+					{
+						"name": "EnglishProductCategoryName",
+						"type": "String"
+					},
+					{
+						"name": "SpanishProductCategoryName",
+						"type": "String"
+					},
+					{
+						"name": "FrenchProductCategoryName",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSynapseAnalyticsTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSynapseAnalytics",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "SalesSummary"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataFlowTest01')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "dataflow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow1",
+								"type": "DataFlowReference"
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "AzureDataLakeStorage1",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "learn-container/dw-staging"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflow1')]"
+			]
+		}
+	]
+}
