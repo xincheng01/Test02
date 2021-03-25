@@ -1,0 +1,23 @@
+{
+	"name": "DimProduct",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"folder": {
+			"name": "Test01"
+		},
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "ADLdataset01",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  ADLdataset01",
+					"dataset": {
+						"referenceName": "ADLdataset01",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"sinks": [],
+			"script": "section Section1;\r\nshared ADLdataset01 = let\r\n  AdfDoc = AzureStorage.DataLakeContents(\"https://adltest08.dfs.core.windows.net/test01/sales.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = ADLdataset01,\r\n  #\"Choose columns\" = Table.SelectColumns(Source, {\"ProductKey\", \"ProductAlternateKey\", \"EnglishProductName\", \"StandardCost\", \"FinishedGoodsFlag\", \"Color\", \"SafetyStockLevel\", \"ReorderPoint\", \"ListPrice\", \"Size\", \"SizeRange\", \"Weight\", \"DaysToManufacture\", \"ProductLine\", \"DealerPrice\", \"Class\", \"Style\", \"ModelName\", \"EnglishProductSubcategoryName\", \"EnglishProductCategoryName\"}),\r\n  #\"Changed column type\" = Table.TransformColumnTypes(#\"Choose columns\", {{\"ProductKey\", Int64.Type}, {\"StandardCost\", Currency.Type}, {\"SafetyStockLevel\", Int64.Type}, {\"ReorderPoint\", Int64.Type}, {\"ListPrice\", Currency.Type}, {\"Weight\", type number}, {\"DaysToManufacture\", Int64.Type}, {\"DealerPrice\", Currency.Type}}),\r\n  #\"Renamed columns\" = Table.RenameColumns(#\"Changed column type\", {{\"EnglishProductName\", \"ProductName\"}, {\"EnglishProductSubcategoryName\", \"ProductSubcategoryName\"}, {\"EnglishProductCategoryName\", \"ProductCategoryName\"}}),\r\n  #\"Reordered columns\" = Table.ReorderColumns(#\"Renamed columns\", {\"ProductKey\", \"ProductAlternateKey\", \"ProductName\", \"ProductSubcategoryName\", \"ProductCategoryName\", \"StandardCost\", \"FinishedGoodsFlag\", \"Color\", \"SafetyStockLevel\", \"ReorderPoint\", \"ListPrice\", \"Size\", \"SizeRange\", \"Weight\", \"DaysToManufacture\", \"ProductLine\", \"DealerPrice\", \"Class\", \"Style\", \"ModelName\"})\r\nin\r\n  #\"Reordered columns\";\r\n"
+		}
+	}
+}
