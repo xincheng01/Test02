@@ -1,0 +1,23 @@
+{
+	"name": "DimCustomer",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"folder": {
+			"name": "Test01"
+		},
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "ADLdataset01",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  ADLdataset01",
+					"dataset": {
+						"referenceName": "ADLdataset01",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"sinks": [],
+			"script": "section Section1;\r\nshared ADLdataset01 = let\r\n  AdfDoc = AzureStorage.DataLakeContents(\"https://adltest08.dfs.core.windows.net/test01/sales.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = ADLdataset01,\r\n  #\"Choose columns\" = Table.SelectColumns(Source, {\"CustomerKey\", \"CustomerAlternateKey\", \"FirstName\", \"MiddleName\", \"LastName\", \"BirthDate\", \"MaritalStatus\", \"Gender\", \"EmailAddress\", \"YearlyIncome\", \"TotalChildren\", \"NumberChildrenAtHome\", \"EnglishEducation\", \"EnglishOccupation\", \"HouseOwnerFlag\", \"NumberCarsOwned\", \"AddressLine1\", \"Phone\", \"DateFirstPurchase\", \"CommuteDistance\", \"City\", \"StateProvinceName\", \"EnglishCountryRegionName\", \"PostalCode\"}),\r\n  #\"Changed column type\" = Table.TransformColumnTypes(#\"Choose columns\", {{\"CustomerKey\", Int64.Type}, {\"BirthDate\", type date}, {\"YearlyIncome\", Int64.Type}, {\"TotalChildren\", Int64.Type}, {\"NumberChildrenAtHome\", Int64.Type}, {\"HouseOwnerFlag\", Int64.Type}, {\"NumberCarsOwned\", Int64.Type}, {\"DateFirstPurchase\", type date}}),\r\n  #\"Renamed columns\" = Table.RenameColumns(#\"Changed column type\", {{\"EnglishCountryRegionName\", \"CountryRegionName\"}, {\"AddressLine1\", \"Address\"}, {\"EnglishOccupation\", \"Occupation\"}, {\"EnglishEducation\", \"Education\"}}),\r\n  #\"Merged columns\" = Table.CombineColumns(#\"Renamed columns\", {\"FirstName\", \"MiddleName\", \"LastName\"}, Combiner.CombineTextByDelimiter(\" \", QuoteStyle.None), \"FullName\")\r\nin\r\n  #\"Merged columns\";\r\n"
+		}
+	}
+}
