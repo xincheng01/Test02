@@ -1,0 +1,23 @@
+{
+	"name": "DimDate",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"folder": {
+			"name": "Test01"
+		},
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "DimDate",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  DimDate",
+					"dataset": {
+						"referenceName": "DimDate",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"sinks": [],
+			"script": "section Section1;\r\nshared DimDate = let\r\n  AdfDoc = AzureStorage.DataLakeContents(\"https://adltest08.dfs.core.windows.net/test01/DimDate.csv\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = DimDate,\r\n  #\"Changed column type\" = Table.TransformColumnTypes(Source, {{\"SID_Date\", Int64.Type}, {\"CalendarDate\", type date}, {\"CalendarYearNo\", Int64.Type}, {\"CalendarHalfNo\", Int64.Type}, {\"CalendarQtrNo\", Int64.Type}, {\"CalendarMonthNo\", Int64.Type}, {\"CalendarMonthDayNo\", Int64.Type}, {\"CalendarMonthStart\", type date}, {\"CalendarMonthEnd\", type date}, {\"CalendarYearHalfNo\", Int64.Type}, {\"CalendarYearQtrNo\", Int64.Type}, {\"CalendarYearMonthNo\", Int64.Type}, {\"ScheduleWeekKey\", Int64.Type}, {\"ScheduleYearNo\", Int64.Type}, {\"ScheduleWeekNo\", Int64.Type}, {\"ScheduleYearWeekNo\", Int64.Type}, {\"ScheduleWeekDayNo\", Int64.Type}}),\r\n  #\"Renamed columns\" = Table.RenameColumns(#\"Changed column type\", {{\"SID_Date\", \"DateKey\"}, {\"CalendarDate\", \"Date\"}})\r\nin\r\n  #\"Renamed columns\";\r\n"
+		}
+	}
+}

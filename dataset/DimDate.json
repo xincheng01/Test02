@@ -1,0 +1,144 @@
+{
+	"name": "DimDate",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "DimDate.csv",
+				"fileSystem": "test01"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "SID_Date",
+				"type": "String"
+			},
+			{
+				"name": "CalendarDate",
+				"type": "String"
+			},
+			{
+				"name": "IsVisible",
+				"type": "String"
+			},
+			{
+				"name": "CalendarYearNo",
+				"type": "String"
+			},
+			{
+				"name": "CalendarYearName",
+				"type": "String"
+			},
+			{
+				"name": "CalendarHalfNo",
+				"type": "String"
+			},
+			{
+				"name": "CalendarHalfName",
+				"type": "String"
+			},
+			{
+				"name": "CalendarQtrNo",
+				"type": "String"
+			},
+			{
+				"name": "CalendarQtrName",
+				"type": "String"
+			},
+			{
+				"name": "CalendarMonthNo",
+				"type": "String"
+			},
+			{
+				"name": "CalendarMonthDayNo",
+				"type": "String"
+			},
+			{
+				"name": "CalendarMonthName",
+				"type": "String"
+			},
+			{
+				"name": "CalendarMonthStart",
+				"type": "String"
+			},
+			{
+				"name": "CalendarMonthEnd",
+				"type": "String"
+			},
+			{
+				"name": "CalendarYearHalfNo",
+				"type": "String"
+			},
+			{
+				"name": "CalendarYearHalfName",
+				"type": "String"
+			},
+			{
+				"name": "CalendarYearQtrNo",
+				"type": "String"
+			},
+			{
+				"name": "CalendarYearQtrName",
+				"type": "String"
+			},
+			{
+				"name": "CalendarYearMonthNo",
+				"type": "String"
+			},
+			{
+				"name": "CalendarYearMonthName",
+				"type": "String"
+			},
+			{
+				"name": "ScheduleWeekKey",
+				"type": "String"
+			},
+			{
+				"name": "ScheduleYearNo",
+				"type": "String"
+			},
+			{
+				"name": "ScheduleYearName",
+				"type": "String"
+			},
+			{
+				"name": "ScheduleWeekNo",
+				"type": "String"
+			},
+			{
+				"name": "ScheduleWeekName",
+				"type": "String"
+			},
+			{
+				"name": "ScheduleYearWeekNo",
+				"type": "String"
+			},
+			{
+				"name": "ScheduleYearWeekName",
+				"type": "String"
+			},
+			{
+				"name": "ScheduleWeekDayNo",
+				"type": "String"
+			},
+			{
+				"name": "ScheduleWeekDayName",
+				"type": "String"
+			},
+			{
+				"name": "ScheduleWeekDayType",
+				"type": "String"
+			}
+		]
+	}
+}
