@@ -1,0 +1,34 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DimCustomerSource",
+						"type": "DatasetReference"
+					},
+					"name": "DimCustomerADLSource"
+				},
+				{
+					"dataset": {
+						"referenceName": "DimCustomerSQLSource",
+						"type": "DatasetReference"
+					},
+					"name": "DimCustomerSQLSource"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "Aggregate1"
+				}
+			],
+			"script": "source(output(\n\t\tCustomerKey as long,\n\t\tCustomerAlternateKey as string,\n\t\tFullName as string,\n\t\tBirthDate as date,\n\t\tMaritalStatus as string,\n\t\tGender as string,\n\t\tEmailAddress as string,\n\t\tYearlyIncome as long,\n\t\tTotalChildren as long,\n\t\tNumberChildrenAtHome as long,\n\t\tEducation as string,\n\t\tOccupation as string,\n\t\tHouseOwnerFlag as long,\n\t\tNumberCarsOwned as long,\n\t\tAddress as string,\n\t\tPhone as string,\n\t\tDateFirstPurchase as date,\n\t\tCommuteDistance as string,\n\t\tCity as string,\n\t\tStateProvinceName as string,\n\t\tCountryRegionName as string,\n\t\tPostalCode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> DimCustomerADLSource\nsource(output(\n\t\tCustomerKey as long,\n\t\tCustomerAlternateKey as string,\n\t\tFullName as string,\n\t\tBirthDate as date,\n\t\tMaritalStatus as string,\n\t\tGender as string,\n\t\tEmailAddress as string,\n\t\tYearlyIncome as long,\n\t\tTotalChildren as long,\n\t\tNumberChildrenAtHome as long,\n\t\tEducation as string,\n\t\tOccupation as string,\n\t\tHouseOwnerFlag as long,\n\t\tNumberCarsOwned as long,\n\t\tAddress as string,\n\t\tPhone as string,\n\t\tDateFirstPurchase as date,\n\t\tCommuteDistance as string,\n\t\tCity as string,\n\t\tStateProvinceName as string,\n\t\tCountryRegionName as string,\n\t\tPostalCode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> DimCustomerSQLSource\nDimCustomerADLSource, DimCustomerSQLSource join(DimCustomerADLSource@CustomerKey == DimCustomerSQLSource@CustomerKey,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> Join1\nJoin1 aggregate(groupBy(DimCustomerADLSource@Education,\n\t\tDimCustomerSQLSource@Occupation),\n\tAvgYearIncome = avg(DimCustomerSQLSource@YearlyIncome),\n\t\tFirstDateFirstPurchase = first(DimCustomerSQLSource@DateFirstPurchase),\n\t\tCount = count(DimCustomerADLSource@CustomerKey)) ~> Aggregate1"
+		}
+	}
+}

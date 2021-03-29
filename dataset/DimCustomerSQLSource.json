@@ -1,0 +1,111 @@
+{
+	"name": "DimCustomerSQLSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "CustomerKey",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "CustomerAlternateKey",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FullName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BirthDate",
+				"type": "date"
+			},
+			{
+				"name": "MaritalStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Gender",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EmailAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "YearlyIncome",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "TotalChildren",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "NumberChildrenAtHome",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Education",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Occupation",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HouseOwnerFlag",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "NumberCarsOwned",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Address",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DateFirstPurchase",
+				"type": "date"
+			},
+			{
+				"name": "CommuteDistance",
+				"type": "nvarchar"
+			},
+			{
+				"name": "City",
+				"type": "nvarchar"
+			},
+			{
+				"name": "StateProvinceName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CountryRegionName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PostalCode",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DimCustomer"
+		}
+	}
+}

@@ -1,0 +1,112 @@
+{
+	"name": "DimCustomerSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "DimCustomerADL.csv",
+				"fileSystem": "test01"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CustomerKey",
+				"type": "String"
+			},
+			{
+				"name": "CustomerAlternateKey",
+				"type": "String"
+			},
+			{
+				"name": "FullName",
+				"type": "String"
+			},
+			{
+				"name": "BirthDate",
+				"type": "String"
+			},
+			{
+				"name": "MaritalStatus",
+				"type": "String"
+			},
+			{
+				"name": "Gender",
+				"type": "String"
+			},
+			{
+				"name": "EmailAddress",
+				"type": "String"
+			},
+			{
+				"name": "YearlyIncome",
+				"type": "String"
+			},
+			{
+				"name": "TotalChildren",
+				"type": "String"
+			},
+			{
+				"name": "NumberChildrenAtHome",
+				"type": "String"
+			},
+			{
+				"name": "Education",
+				"type": "String"
+			},
+			{
+				"name": "Occupation",
+				"type": "String"
+			},
+			{
+				"name": "HouseOwnerFlag",
+				"type": "String"
+			},
+			{
+				"name": "NumberCarsOwned",
+				"type": "String"
+			},
+			{
+				"name": "Address",
+				"type": "String"
+			},
+			{
+				"name": "Phone",
+				"type": "String"
+			},
+			{
+				"name": "DateFirstPurchase",
+				"type": "String"
+			},
+			{
+				"name": "CommuteDistance",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "StateProvinceName",
+				"type": "String"
+			},
+			{
+				"name": "CountryRegionName",
+				"type": "String"
+			},
+			{
+				"name": "PostalCode",
+				"type": "String"
+			}
+		]
+	}
+}
