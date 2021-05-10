@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 2",
+	"properties": {
+		"content": {
+			"query": "SELECT TOP (100) [CustomerKey]\n,[CustomerAlternateKey]\n,[FirstName]\n,[MiddleName]\n,[LastName]\n,[NameStyle]\n,[BirthDate]\n,[MaritalStatus]\n,[Gender]\n,[EmailAddress]\n,[YearlyIncome]\n,[TotalChildren]\n,[NumberChildrenAtHome]\n,[EnglishEducation]\n,[EnglishOccupation]\n,[HouseOwnerFlag]\n,[NumberCarsOwned]\n,[AddressLine1]\n,[Phone]\n,[DateFirstPurchase]\n,[CommuteDistance]\n FROM [dbo].[DimCustomer] \n\n SELECT COUNT(*)  FROM [dbo].[DimCustomer]\n  --18484\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "dwtest01",
+				"databaseName": "dwtest01"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

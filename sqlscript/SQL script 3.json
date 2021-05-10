@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 3",
+	"properties": {
+		"content": {
+			"query": "CREATE PROC [dbo].[truncatetables]\n\nAS\n\nBEGIN\n\nTRUNCATE TABLE DBO.DimCustomer; \n\nTRUNCATE TABLE DBO.DimProduct; \n\nTRUNCATE TABLE DBO.DimSalesTerritory; \n\nTRUNCATE TABLE DBO.DimEmployee; \n\nTRUNCATE TABLE DBO.DimDate; \n\nTRUNCATE TABLE DBO.DimDateGPNW; \n\nTRUNCATE TABLE DBO.DimGeography; \n\nTRUNCATE TABLE DBO.DimReseller; \n\nTRUNCATE TABLE DBO.DimCurrency;\n\nTRUNCATE TABLE DBO.DimPromotion;\n\nTRUNCATE TABLE DBO.FactInternetSales; \n\nTRUNCATE TABLE DBO.FactResellerSales; \n\nEND\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "dwtest01",
+				"databaseName": "dwtest01"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
