@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 5",
+	"properties": {
+		"content": {
+			"query": "SELECT TOP (100) [PassengerCount]\n,[SumTripDistance]\n,[AvgTripDistance]\n FROM [nyctaxi].[dbo].[passengercountstats]",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "nyctaxi"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
