@@ -1,0 +1,530 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"type": "string",
+			"metadata": "Workspace name",
+			"defaultValue": "asatest02"
+		},
+		"AzureSynapseAnalytics1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSynapseAnalytics1'"
+		},
+		"asatest02-WorkspaceDefaultSqlServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'asatest02-WorkspaceDefaultSqlServer'"
+		},
+		"asatest02-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adltest02.dfs.core.windows.net"
+		}
+	},
+	"variables": {
+		"workspaceId": "[concat('Microsoft.Synapse/workspaces/', parameters('workspaceName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('workspaceName'), '/Pipeline 1')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "UpdateCustomerDimension",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"SourceDB": {},
+									"DimCustomerSCD": {},
+									"sink": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2021-05-10T02:28:14Z"
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/UpdateCustomerDimension')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/CustomerSource')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSynapseAnalytics1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "CustomerID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Title",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FirstName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MiddleName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LastName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Suffix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CompanyName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SalesPerson",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EmailAddress",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Phone",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CustomerSource"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/AzureSynapseAnalytics1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/DimCustomer')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSynapseAnalytics1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "CustomerID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Title",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FirstName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MiddleName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LastName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Suffix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CompanyName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SalesPerson",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EmailAddress",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Phone",
+						"type": "nvarchar"
+					},
+					{
+						"name": "InsertedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ModifiedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "HashKey",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DimCustomer_SCD"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/AzureSynapseAnalytics1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AzureSynapseAnalytics1')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDW",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSynapseAnalytics1_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/asatest02-WorkspaceDefaultSqlServer')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"parameters": {
+					"DBName": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "AzureSqlDW",
+				"typeProperties": {
+					"connectionString": "[parameters('asatest02-WorkspaceDefaultSqlServer_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/asatest02-WorkspaceDefaultStorage')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('asatest02-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AutoResolveIntegrationRuntime')]",
+			"type": "Microsoft.Synapse/workspaces/integrationRuntimes",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "AutoResolve",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 0
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/UpdateCustomerDimension')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "CustomerSource",
+								"type": "DatasetReference"
+							},
+							"name": "SourceDB"
+						},
+						{
+							"dataset": {
+								"referenceName": "DimCustomer",
+								"type": "DatasetReference"
+							},
+							"name": "DimCustomerSCD"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DimCustomer",
+								"type": "DatasetReference"
+							},
+							"name": "sink"
+						}
+					],
+					"transformations": [
+						{
+							"name": "CreateCustomerHash"
+						},
+						{
+							"name": "Exists"
+						},
+						{
+							"name": "LookupCustomerID"
+						},
+						{
+							"name": "SetDates"
+						},
+						{
+							"name": "AllowUpserts"
+						}
+					],
+					"script": "source(output(\n\t\tCustomerID as integer,\n\t\tTitle as string,\n\t\tFirstName as string,\n\t\tMiddleName as string,\n\t\tLastName as string,\n\t\tSuffix as string,\n\t\tCompanyName as string,\n\t\tSalesPerson as string,\n\t\tEmailAddress as string,\n\t\tPhone as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> SourceDB\nsource(output(\n\t\tCustomerID as integer,\n\t\tTitle as string,\n\t\tFirstName as string,\n\t\tMiddleName as string,\n\t\tLastName as string,\n\t\tSuffix as string,\n\t\tCompanyName as string,\n\t\tSalesPerson as string,\n\t\tEmailAddress as string,\n\t\tPhone as string,\n\t\tInsertedDate as timestamp,\n\t\tModifiedDate as timestamp,\n\t\tHashKey as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table',\n\tstaged: false) ~> DimCustomerSCD\nSourceDB derive(HashKey = sha2(256, iifNull(Title,'') +FirstName +iifNull(MiddleName,'') +LastName +iifNull(Suffix,'') +iifNull(CompanyName,'') +iifNull(SalesPerson,'') +iifNull(EmailAddress,'') +iifNull(Phone,''))) ~> CreateCustomerHash\nCreateCustomerHash, DimCustomerSCD exists(CreateCustomerHash@HashKey == DimCustomerSCD@HashKey,\n\tnegate:true,\n\tbroadcast: 'auto')~> Exists\nExists, DimCustomerSCD lookup(SourceDB@CustomerID == DimCustomerSCD@CustomerID,\n\tmultiple: false,\n\tpickup: 'any',\n\tbroadcast: 'auto')~> LookupCustomerID\nLookupCustomerID derive(InsertedDate = iif(isNull(InsertedDate), currentTimestamp(), InsertedDate),\n\t\tModifiedDate = currentTimestamp()) ~> SetDates\nSetDates alterRow(upsertIf(true())) ~> AllowUpserts\nAllowUpserts sink(input(\n\t\tCustomerID as integer,\n\t\tTitle as string,\n\t\tFirstName as string,\n\t\tMiddleName as string,\n\t\tLastName as string,\n\t\tSuffix as string,\n\t\tCompanyName as string,\n\t\tSalesPerson as string,\n\t\tEmailAddress as string,\n\t\tPhone as string,\n\t\tInsertedDate as timestamp,\n\t\tModifiedDate as timestamp,\n\t\tHashKey as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:true,\n\tkeys:['CustomerID'],\n\tformat: 'table',\n\tstaged: false,\n\tmapColumn(\n\t\tCustomerID = SourceDB@CustomerID,\n\t\tTitle = SourceDB@Title,\n\t\tFirstName = SourceDB@FirstName,\n\t\tMiddleName = SourceDB@MiddleName,\n\t\tLastName = SourceDB@LastName,\n\t\tSuffix = SourceDB@Suffix,\n\t\tCompanyName = SourceDB@CompanyName,\n\t\tSalesPerson = SourceDB@SalesPerson,\n\t\tEmailAddress = SourceDB@EmailAddress,\n\t\tPhone = SourceDB@Phone,\n\t\tInsertedDate,\n\t\tModifiedDate,\n\t\tHashKey = CreateCustomerHash@HashKey\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/datasets/CustomerSource')]",
+				"[concat(variables('workspaceId'), '/datasets/DimCustomer')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/WorkspaceSystemIdentity')]",
+			"type": "Microsoft.Synapse/workspaces/credentials",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "ManagedIdentity",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 1')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "DROP TABLE [dbo].[DimCustomer]\nGO\n\nCREATE TABLE [dbo].[DimCustomer](\n\t[CustomerKey] [int] NOT NULL,\n\t[CustomerAlternateKey] [nvarchar](15) NOT NULL,\n\t[FirstName] [nvarchar](50) NULL,\n\t[MiddleName] [nvarchar](50) NULL,\n\t[LastName] [nvarchar](50) NULL,\n\t[NameStyle] [bit] NULL,\n\t[BirthDate] [date] NULL,\n\t[MaritalStatus] [nchar](1) NULL,\n\t[Gender] [nvarchar](1) NULL,\n\t[EmailAddress] [nvarchar](50) NULL,\n\t[YearlyIncome] [money] NULL,\n\t[TotalChildren] [tinyint] NULL,\n\t[NumberChildrenAtHome] [tinyint] NULL,\n\t[EnglishEducation] [nvarchar](40) NULL,\n\t[EnglishOccupation] [nvarchar](100) NULL,\n\t[HouseOwnerFlag] [nchar](1) NULL,\n\t[NumberCarsOwned] [tinyint] NULL,\n\t[AddressLine1] [nvarchar](120) NULL,\n\t[Phone] [nvarchar](20) NULL,\n\t[DateFirstPurchase] [date] NULL,\n\t[CommuteDistance] [nvarchar](15) NULL\n) \nGO\n\n\n\nCREATE TABLE [dbo].[DimProduct](\n\t[ProductKey] [int] NOT NULL,\n\t[ProductAlternateKey] [nvarchar](25) NULL,\n\t[ProductName] [nvarchar](50) NOT NULL,\n\tSubcategory [nvarchar](50) NOT NULL,\n\tCategory [nvarchar](50) NOT NULL,\n\t[StandardCost] [money] NULL,\n\t[Color] [nvarchar](15) NOT NULL,\n\t[ListPrice] [money] NULL,\n\t[DaysToManufacture] [int] NULL,\n\t[ProductLine] [nchar](2) NULL,\n\t[DealerPrice] [money] NULL,\n\t[Class] [nchar](2) NULL,\n\t[Style] [nchar](2) NULL,\n\t[ModelName] [nvarchar](50) NULL\n) \nGO\n\n\nCREATE TABLE [dbo].[DimSalesTerritory](\n\t[SalesTerritoryKey] [int] NOT NULL,\n\t[SalesTerritoryAlternateKey] [int] NULL,\n\t[SalesTerritoryRegion] [nvarchar](50) NOT NULL,\n\t[SalesTerritoryCountry] [nvarchar](50) NOT NULL,\n\t[SalesTerritoryGroup] [nvarchar](50) NULL\n) \nGO\n\n\n\nCREATE TABLE [dbo].[FactInternetSales](\n\t[ProductKey] [int] NOT NULL,\n\t[OrderDateKey] [int] NOT NULL,\n\t[DueDateKey] [int] NOT NULL,\n\t[ShipDateKey] [int] NOT NULL,\n\t[CustomerKey] [int] NOT NULL,\n\t[PromotionKey] [int] NOT NULL,\n\t[CurrencyKey] [int] NOT NULL,\n\t[SalesTerritoryKey] [int] NOT NULL,\n\t[SalesOrderNumber] [nvarchar](20) NOT NULL,\n\t[SalesOrderLineNumber] [tinyint] NOT NULL,\n\t[RevisionNumber] [tinyint] NOT NULL,\n\t[OrderQuantity] [smallint] NOT NULL,\n\t[UnitPrice] [money] NOT NULL,\n\t[ExtendedAmount] [money] NOT NULL,\n\t[UnitPriceDiscountPct] [float] NOT NULL,\n\t[DiscountAmount] [float] NOT NULL,\n\t[ProductStandardCost] [money] NOT NULL,\n\t[TotalProductCost] [money] NOT NULL,\n\t[SalesAmount] [money] NOT NULL,\n\t[TaxAmt] [money] NOT NULL,\n\t[Freight] [money] NOT NULL,\n\t[CarrierTrackingNumber] [nvarchar](25) NULL,\n\t[CustomerPONumber] [nvarchar](25) NULL,\n\t[OrderDate] [datetime] NULL,\n\t[DueDate] [datetime] NULL,\n\t[ShipDate] [datetime] NULL\n) \nGO\n\nCREATE TABLE [dbo].[DimEmployee](\n\t[EmployeeKey] [int] NOT NULL,\n\t[ParentEmployeeKey] [int] NULL,\n\t[EmployeeNationalIDAlternateKey] [nvarchar](15) NULL,\n\t[ParentEmployeeNationalIDAlternateKey] [nvarchar](15) NULL,\n\t[SalesTerritoryKey] [int] NULL,\n\t[FirstName] [nvarchar](50) NOT NULL,\n\t[LastName] [nvarchar](50) NOT NULL,\n\t[MiddleName] [nvarchar](50) NULL,\n\t[NameStyle] [bit] NOT NULL,\n\t[Title] [nvarchar](50) NULL,\n\t[HireDate] [date] NULL,\n\t[BirthDate] [date] NULL,\n\t[LoginID] [nvarchar](256) NULL,\n\t[EmailAddress] [nvarchar](50) NULL,\n\t[Phone] [nvarchar](25) NULL,\n\t[MaritalStatus] [nchar](1) NULL,\n\t[EmergencyContactName] [nvarchar](50) NULL,\n\t[EmergencyContactPhone] [nvarchar](25) NULL,\n\t[SalariedFlag] [bit] NULL,\n\t[Gender] [nchar](1) NULL,\n\t[PayFrequency] [tinyint] NULL,\n\t[BaseRate] [money] NULL,\n\t[VacationHours] [smallint] NULL,\n\t[SickLeaveHours] [smallint] NULL,\n\t[CurrentFlag] [bit] NOT NULL,\n\t[SalesPersonFlag] [bit] NOT NULL,\n\t[DepartmentName] [nvarchar](50) NULL,\n\t[StartDate] [date] NULL,\n\t[EndDate] [date] NULL,\n\t[Status] [nvarchar](50) NULL ) \nGO\n\n\n\nCREATE TABLE [dbo].[DimDate](\n\t[DateKey] [int] NOT NULL,\n\t[FullDateAlternateKey] [date] NOT NULL,\n\t[DayNumberOfWeek] [tinyint] NOT NULL,\n\t[DayNameOfWeek] [nvarchar](10) NOT NULL,\n\t[DayNumberOfMonth] [tinyint] NOT NULL,\n\t[DayNumberOfYear] [smallint] NOT NULL,\n\t[WeekNumberOfYear] [tinyint] NOT NULL,\n\t[MonthName] [nvarchar](10) NOT NULL,\n\t[MonthNumberOfYear] [tinyint] NOT NULL,\n\t[CalendarQuarter] [tinyint] NOT NULL,\n\t[CalendarYear] [smallint] NOT NULL,\n\t[CalendarSemester] [tinyint] NOT NULL,\n\t[FiscalQuarter] [tinyint] NOT NULL,\n\t[FiscalYear] [smallint] NOT NULL,\n\t[FiscalSemester] [tinyint] NOT NULL\n) \nGO\n\n\nCREATE TABLE [dbo].[DimGeography](\n\t[GeographyKey] [int] NOT NULL,\n\t[City] [nvarchar](30) NULL,\n\t[StateProvinceCode] [nvarchar](3) NULL,\n\t[StateProvinceName] [nvarchar](50) NULL,\n\t[CountryRegionCode] [nvarchar](3) NULL,\n\t[CountryRegionName] [nvarchar](50) NULL,\n\t[PostalCode] [nvarchar](15) NULL,\n\t[SalesTerritoryKey] [int] NULL,\n\t[IpAddressLocator] [nvarchar](15) NULL\n) \nGO\n\n\nCREATE TABLE [dbo].[DimReseller](\n\t[ResellerKey] [int] NOT NULL,\n\t[GeographyKey] [int] NULL,\n\t[ResellerAlternateKey] [nvarchar](15) NULL,\n\t[Phone] [nvarchar](25) NULL,\n\t[BusinessType] [varchar](20) NOT NULL,\n\t[ResellerName] [nvarchar](50) NOT NULL,\n\t[NumberEmployees] [int] NULL,\n\t[OrderFrequency] [char](1) NULL,\n\t[OrderMonth] [tinyint] NULL,\n\t[FirstOrderYear] [int] NULL,\n\t[LastOrderYear] [int] NULL,\n\t[ProductLine] [nvarchar](50) NULL,\n\t[AddressLine1] [nvarchar](60) NULL,\n\t[AddressLine2] [nvarchar](60) NULL,\n\t[AnnualSales] [money] NULL,\n\t[BankName] [nvarchar](50) NULL,\n\t[MinPaymentType] [tinyint] NULL,\n\t[MinPaymentAmount] [money] NULL,\n\t[AnnualRevenue] [money] NULL,\n\t[YearOpened] [int] NULL\n) \nGO\n\n\nCREATE TABLE [dbo].[DimCurrency](\n\t[CurrencyKey] [int] NOT NULL,\n\t[CurrencyAlternateKey] [nchar](3) NOT NULL,\n\t[CurrencyName] [nvarchar](50) NOT NULL\n) \nGO\n\nCREATE TABLE [dbo].[DimPromotion](\n\t[PromotionKey] [int] NOT NULL,\n\t[PromotionAlternateKey] [int] NULL,\n\t[PromotionName] [nvarchar](255) NULL,\n\t[DiscountPct] [float] NULL,\n\t[PromotionType] [nvarchar](50) NULL,\n\t[PromotionCategory] [nvarchar](50) NULL,\n\t[StartDate] [datetime] NOT NULL,\n\t[EndDate] [datetime] NULL,\n\t[MinQty] [int] NULL,\n\t[MaxQty] [int] NULL\n) \nGO\n\n\nCREATE TABLE [dbo].[FactResellerSales](\n\t[ProductKey] [int] NOT NULL,\n\t[OrderDateKey] [int] NOT NULL,\n\t[DueDateKey] [int] NOT NULL,\n\t[ShipDateKey] [int] NOT NULL,\n\t[ResellerKey] [int] NOT NULL,\n\t[EmployeeKey] [int] NOT NULL,\n\t[PromotionKey] [int] NOT NULL,\n\t[CurrencyKey] [int] NOT NULL,\n\t[SalesTerritoryKey] [int] NOT NULL,\n\t[SalesOrderNumber] [nvarchar](20) NOT NULL,\n\t[SalesOrderLineNumber] [tinyint] NOT NULL,\n\t[RevisionNumber] [tinyint] NULL,\n\t[OrderQuantity] [smallint] NULL,\n\t[UnitPrice] [money] NULL,\n\t[ExtendedAmount] [money] NULL,\n\t[UnitPriceDiscountPct] [float] NULL,\n\t[DiscountAmount] [float] NULL,\n\t[ProductStandardCost] [money] NULL,\n\t[TotalProductCost] [money] NULL,\n\t[SalesAmount] [money] NULL,\n\t[TaxAmt] [money] NULL,\n\t[Freight] [money] NULL,\n\t[CarrierTrackingNumber] [nvarchar](25) NULL,\n\t[CustomerPONumber] [nvarchar](25) NULL,\n\t[OrderDate] [datetime] NULL,\n\t[DueDate] [datetime] NULL,\n\t[ShipDate] [datetime] NULL\n) \nGO\n\n\nCREATE TABLE [dbo].[DimDateGPNW](\n\t[SID_Date] [int] NOT NULL,\n\t[CalendarDate] [date] NOT NULL,\n\t[IsVisible] [bit] NOT NULL,\n\t[CalendarYearNo] [int] NOT NULL,\n\t[CalendarYearName] [nvarchar](50) NOT NULL,\n\t[CalendarHalfNo] [int] NOT NULL,\n\t[CalendarHalfName] [nvarchar](50) NOT NULL,\n\t[CalendarQtrNo] [int] NOT NULL,\n\t[CalendarQtrName] [nvarchar](50) NOT NULL,\n\t[CalendarMonthNo] [int] NOT NULL,\n\t[CalendarMonthDayNo] [int] NOT NULL,\n\t[CalendarMonthName] [nvarchar](50) NOT NULL,\n\t[CalendarMonthStart] [date] NOT NULL,\n\t[CalendarMonthEnd] [date] NOT NULL,\n\t[CalendarYearHalfNo] [int] NOT NULL,\n\t[CalendarYearHalfName] [nvarchar](50) NOT NULL,\n\t[CalendarYearQtrNo] [int] NOT NULL,\n\t[CalendarYearQtrName] [nvarchar](50) NOT NULL,\n\t[CalendarYearMonthNo] [int] NOT NULL,\n\t[CalendarYearMonthName] [nvarchar](50) NOT NULL,\n\t[ScheduleWeekKey] [int] NOT NULL,\n\t[ScheduleYearNo] [int] NOT NULL,\n\t[ScheduleYearName] [nvarchar](50) NOT NULL,\n\t[ScheduleWeekNo] [int] NOT NULL,\n\t[ScheduleWeekName] [nvarchar](50) NOT NULL,\n\t[ScheduleYearWeekNo] [int] NOT NULL,\n\t[ScheduleYearWeekName] [nvarchar](50) NOT NULL,\n\t[ScheduleWeekDayNo] [int] NOT NULL,\n\t[ScheduleWeekDayName] [nvarchar](50) NOT NULL,\n\t[ScheduleWeekDayType] [nvarchar](50) NOT NULL\n) \nGO\n",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"poolName": "dwtest01",
+						"databaseName": "dwtest01"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 2')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [CustomerKey]\n,[CustomerAlternateKey]\n,[FirstName]\n,[MiddleName]\n,[LastName]\n,[NameStyle]\n,[BirthDate]\n,[MaritalStatus]\n,[Gender]\n,[EmailAddress]\n,[YearlyIncome]\n,[TotalChildren]\n,[NumberChildrenAtHome]\n,[EnglishEducation]\n,[EnglishOccupation]\n,[HouseOwnerFlag]\n,[NumberCarsOwned]\n,[AddressLine1]\n,[Phone]\n,[DateFirstPurchase]\n,[CommuteDistance]\n FROM [dbo].[DimCustomer] \n\n SELECT COUNT(*)  FROM [dbo].[DimCustomer]\n  --18484\n",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"poolName": "dwtest01",
+						"databaseName": "dwtest01"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 3')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "CREATE PROC [dbo].[truncatetables]\n\nAS\n\nBEGIN\n\nTRUNCATE TABLE DBO.DimCustomer; \n\nTRUNCATE TABLE DBO.DimProduct; \n\nTRUNCATE TABLE DBO.DimSalesTerritory; \n\nTRUNCATE TABLE DBO.DimEmployee; \n\nTRUNCATE TABLE DBO.DimDate; \n\nTRUNCATE TABLE DBO.DimDateGPNW; \n\nTRUNCATE TABLE DBO.DimGeography; \n\nTRUNCATE TABLE DBO.DimReseller; \n\nTRUNCATE TABLE DBO.DimCurrency;\n\nTRUNCATE TABLE DBO.DimPromotion;\n\nTRUNCATE TABLE DBO.FactInternetSales; \n\nTRUNCATE TABLE DBO.FactResellerSales; \n\nEND\n",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"poolName": "dwtest01",
+						"databaseName": "dwtest01"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 4')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "CREATE TABLE [dbo].[CustomerSource] (\n    [CustomerID] [int] NOT NULL,\n    [Title] [nvarchar](8),\n    [FirstName] [nvarchar](50),\n    [MiddleName] [nvarchar](50),\n    [LastName] [nvarchar](50),\n    [Suffix] [nvarchar](10),\n    [CompanyName] [nvarchar](128),\n    [SalesPerson] [nvarchar](256),\n    [EmailAddress] [nvarchar](50),\n    [Phone] [nvarchar](25)\n) WITH ( HEAP )\n\nCOPY INTO [dbo].[CustomerSource]\nFROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/CustomerSource.csv'\nWITH (\n    FILE_TYPE='CSV',\n    FIELDTERMINATOR='|',\n    FIELDQUOTE='',\n    ROWTERMINATOR='0x0a',\n    ENCODING = 'UTF16'\n)\n\nCREATE TABLE dbo.[DimCustomer_SCD](\n    [CustomerID] [int] NOT NULL,\n    [Title] [nvarchar](8) NULL,\n    [FirstName] [nvarchar](50) NOT NULL,\n    [MiddleName] [nvarchar](50) NULL,\n    [LastName] [nvarchar](50) NOT NULL,\n    [Suffix] [nvarchar](10) NULL,\n    [CompanyName] [nvarchar](128) NULL,\n    [SalesPerson] [nvarchar](256) NULL,\n    [EmailAddress] [nvarchar](50) NULL,\n    [Phone] [nvarchar](25) NULL,\n    [InsertedDate] [datetime] NOT NULL,\n    [ModifiedDate] [datetime] NOT NULL,\n    [HashKey] [char](66)\n)\nWITH\n(\n    DISTRIBUTION = REPLICATE,\n    CLUSTERED COLUMNSTORE INDEX\n)",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"poolName": "dwtest01",
+						"databaseName": "dwtest01"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Notebook NYC Taxi')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "Sparkpool01",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "28g",
+					"driverCores": 4,
+					"executorMemory": "28g",
+					"executorCores": 4,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"synapse_widget": {
+						"version": "0.1",
+						"state": {}
+					},
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "python"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/8759debb-3921-4c79-904d-c0e86b64d530/resourceGroups/zxctest01/providers/Microsoft.Synapse/workspaces/asatest02/bigDataPools/Sparkpool01",
+						"name": "Sparkpool01",
+						"type": "Spark",
+						"endpoint": "https://asatest02.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/Sparkpool01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "2.4",
+						"nodeCount": 4,
+						"cores": 4,
+						"memory": 28,
+						"automaticScaleJobs": false
+					},
+					"sessionKeepAliveTimeout": 30
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"metadata": {
+							"microsoft": {
+								"language": "python"
+							},
+							"collapsed": false
+						},
+						"source": [
+							"%%pyspark\r\n",
+							"df = spark.read.load('abfss://myworkspace@adltest02.dfs.core.windows.net/NYCTripSmall.parquet', format='parquet')\r\n",
+							"display(df.limit(10))"
+						],
+						"outputs": [],
+						"execution_count": 1
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/dwtest01')]",
+			"type": "Microsoft.Synapse/workspaces/sqlPools",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"collation": "SQL_Latin1_General_CP1_CI_AS",
+				"maxSizeBytes": 263882790666240,
+				"restorePointInTime": "0001-01-01T00:00:00",
+				"annotations": []
+			},
+			"dependsOn": [],
+			"location": "eastus"
+		}
+	]
+}
