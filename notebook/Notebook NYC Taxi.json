@@ -22,311 +22,7 @@
 		"metadata": {
 			"saveOutput": true,
 			"synapse_widget": {
-				"version": "0.1",
-				"state": {
-					"e476e25c-21da-41f0-aad8-b87352645b3e": {
-						"type": "Synapse.DataFrame",
-						"sync_state": {
-							"table": {
-								"rows": [
-									{
-										"TipAmount": 0,
-										"PickupTimeID": 63879,
-										"PickupLongitude": -73.9513,
-										"DropoffTimeID": 64392,
-										"TollsAmount": 0,
-										"TotalAmount": 9,
-										"PickupLatLong": "40.8124,-73.9513",
-										"TripDistanceMiles": 1.3,
-										"PickupGeographyID": 172348,
-										"DropoffGeographyID": 219532,
-										"TripDurationSeconds": 513,
-										"SurchargeAmount": 1,
-										"DateID": 20131231,
-										"DropoffLatLong": "40.7982,-73.9444",
-										"DropoffLongitude": -73.9444,
-										"TaxAmount": 0.5,
-										"DropoffLatitude": 40.7982,
-										"PickupLatitude": 40.8124,
-										"HackneyLicenseID": 35117,
-										"PassengerCount": 1,
-										"PaymentType": "CSH",
-										"FareAmount": 7.5,
-										"MedallionID": 10624
-									},
-									{
-										"TipAmount": 0,
-										"PickupTimeID": 61733,
-										"PickupLongitude": -73.9857,
-										"DropoffTimeID": 62114,
-										"TollsAmount": 0,
-										"TotalAmount": 8.5,
-										"PickupLatLong": "40.7352,-73.9857",
-										"TripDistanceMiles": 1.3,
-										"PickupGeographyID": 87083,
-										"DropoffGeographyID": 137768,
-										"TripDurationSeconds": 380,
-										"SurchargeAmount": 1,
-										"DateID": 20131231,
-										"DropoffLatLong": "40.751,-73.9789",
-										"DropoffLongitude": -73.9789,
-										"TaxAmount": 0.5,
-										"DropoffLatitude": 40.751,
-										"PickupLatitude": 40.7352,
-										"HackneyLicenseID": 11597,
-										"PassengerCount": 1,
-										"PaymentType": "CSH",
-										"FareAmount": 7,
-										"MedallionID": 7263
-									},
-									{
-										"TipAmount": 0,
-										"PickupTimeID": 59488,
-										"PickupLongitude": -73.9483,
-										"DropoffTimeID": 59815,
-										"TollsAmount": 0,
-										"TotalAmount": 7.5,
-										"PickupLatLong": "40.7699,-73.9483",
-										"TripDistanceMiles": 1,
-										"PickupGeographyID": 82160,
-										"DropoffGeographyID": 146431,
-										"TripDurationSeconds": 326,
-										"SurchargeAmount": 1,
-										"DateID": 20131231,
-										"DropoffLatLong": "40.763,-73.962",
-										"DropoffLongitude": -73.962,
-										"TaxAmount": 0.5,
-										"DropoffLatitude": 40.763,
-										"PickupLatitude": 40.7699,
-										"HackneyLicenseID": 5301,
-										"PassengerCount": 1,
-										"PaymentType": "CSH",
-										"FareAmount": 6,
-										"MedallionID": 1899
-									},
-									{
-										"TipAmount": 0,
-										"PickupTimeID": 69093,
-										"PickupLongitude": -73.9746,
-										"DropoffTimeID": 69548,
-										"TollsAmount": 0,
-										"TotalAmount": 8.5,
-										"PickupLatLong": "40.7507,-73.9746",
-										"TripDistanceMiles": 1,
-										"PickupGeographyID": 276342,
-										"DropoffGeographyID": 43408,
-										"TripDurationSeconds": 454,
-										"SurchargeAmount": 1,
-										"DateID": 20131231,
-										"DropoffLatLong": "40.7428,-73.9823",
-										"DropoffLongitude": -73.9823,
-										"TaxAmount": 0.5,
-										"DropoffLatitude": 40.7428,
-										"PickupLatitude": 40.7507,
-										"HackneyLicenseID": 28727,
-										"PassengerCount": 1,
-										"PaymentType": "CSH",
-										"FareAmount": 7,
-										"MedallionID": 9471
-									},
-									{
-										"TipAmount": 0,
-										"PickupTimeID": 51720,
-										"PickupLongitude": -74.0119,
-										"DropoffTimeID": 52440,
-										"TollsAmount": 0,
-										"TotalAmount": 20,
-										"PickupLatLong": "40.7138,-74.0119",
-										"TripDistanceMiles": 6.11,
-										"PickupGeographyID": 155260,
-										"DropoffGeographyID": 211054,
-										"TripDurationSeconds": 720,
-										"SurchargeAmount": 0,
-										"DateID": 20131231,
-										"DropoffLatLong": "40.7494,-73.9694",
-										"DropoffLongitude": -73.9694,
-										"TaxAmount": 0.5,
-										"DropoffLatitude": 40.7494,
-										"PickupLatitude": 40.7138,
-										"HackneyLicenseID": 16124,
-										"PassengerCount": 1,
-										"PaymentType": "CSH",
-										"FareAmount": 19.5,
-										"MedallionID": 2556
-									},
-									{
-										"TipAmount": 0,
-										"PickupTimeID": 31260,
-										"PickupLongitude": -73.9773,
-										"DropoffTimeID": 32100,
-										"TollsAmount": 0,
-										"TotalAmount": 12,
-										"PickupLatLong": "40.726,-73.9773",
-										"TripDistanceMiles": 2.16,
-										"PickupGeographyID": 263305,
-										"DropoffGeographyID": 80576,
-										"TripDurationSeconds": 840,
-										"SurchargeAmount": 0,
-										"DateID": 20131231,
-										"DropoffLatLong": "40.749,-73.9838",
-										"DropoffLongitude": -73.9838,
-										"TaxAmount": 0.5,
-										"DropoffLatitude": 40.749,
-										"PickupLatitude": 40.726,
-										"HackneyLicenseID": 33809,
-										"PassengerCount": 1,
-										"PaymentType": "CSH",
-										"FareAmount": 11.5,
-										"MedallionID": 1433
-									},
-									{
-										"TipAmount": 0,
-										"PickupTimeID": 18150,
-										"PickupLongitude": -74.008,
-										"DropoffTimeID": 20112,
-										"TollsAmount": 0,
-										"TotalAmount": 33,
-										"PickupLatLong": "40.7421,-74.008",
-										"TripDistanceMiles": 9.2,
-										"PickupGeographyID": 26661,
-										"DropoffGeographyID": 108578,
-										"TripDurationSeconds": 1962,
-										"SurchargeAmount": 0.5,
-										"DateID": 20131231,
-										"DropoffLatLong": "40.757,-73.8866",
-										"DropoffLongitude": -73.8866,
-										"TaxAmount": 0.5,
-										"DropoffLatitude": 40.757,
-										"PickupLatitude": 40.7421,
-										"HackneyLicenseID": 7842,
-										"PassengerCount": 1,
-										"PaymentType": "CSH",
-										"FareAmount": 32,
-										"MedallionID": 1486
-									},
-									{
-										"TipAmount": 0,
-										"PickupTimeID": 37020,
-										"PickupLongitude": -73.8637,
-										"DropoffTimeID": 38460,
-										"TollsAmount": 0,
-										"TotalAmount": 41,
-										"PickupLatLong": "40.7697,-73.8637",
-										"TripDistanceMiles": 14.78,
-										"PickupGeographyID": 147003,
-										"DropoffGeographyID": 70493,
-										"TripDurationSeconds": 1440,
-										"SurchargeAmount": 0,
-										"DateID": 20131231,
-										"DropoffLatLong": "40.6519,-74.0064",
-										"DropoffLongitude": -74.0064,
-										"TaxAmount": 0.5,
-										"DropoffLatitude": 40.6519,
-										"PickupLatitude": 40.7697,
-										"HackneyLicenseID": 36224,
-										"PassengerCount": 1,
-										"PaymentType": "CSH",
-										"FareAmount": 40.5,
-										"MedallionID": 7225
-									},
-									{
-										"TipAmount": 4.35,
-										"PickupTimeID": 64740,
-										"PickupLongitude": -74.0022,
-										"DropoffTimeID": 65700,
-										"TollsAmount": 0,
-										"TotalAmount": 19.35,
-										"PickupLatLong": "40.7263,-74.0022",
-										"TripDistanceMiles": 3.25,
-										"PickupGeographyID": 230937,
-										"DropoffGeographyID": 116813,
-										"TripDurationSeconds": 960,
-										"SurchargeAmount": 1,
-										"DateID": 20131231,
-										"DropoffLatLong": "40.7555,-73.9729",
-										"DropoffLongitude": -73.9729,
-										"TaxAmount": 0.5,
-										"DropoffLatitude": 40.7555,
-										"PickupLatitude": 40.7263,
-										"HackneyLicenseID": 35009,
-										"PassengerCount": 1,
-										"PaymentType": "CRD",
-										"FareAmount": 13.5,
-										"MedallionID": 8726
-									},
-									{
-										"TipAmount": 3.75,
-										"PickupTimeID": 66600,
-										"PickupLongitude": -73.9822,
-										"DropoffTimeID": 67260,
-										"TollsAmount": 0,
-										"TotalAmount": 19.25,
-										"PickupLatLong": "40.7698,-73.9822",
-										"TripDistanceMiles": 3.92,
-										"PickupGeographyID": 225983,
-										"DropoffGeographyID": 76697,
-										"TripDurationSeconds": 660,
-										"SurchargeAmount": 1,
-										"DateID": 20131231,
-										"DropoffLatLong": "40.8166,-73.9605",
-										"DropoffLongitude": -73.9605,
-										"TaxAmount": 0.5,
-										"DropoffLatitude": 40.8166,
-										"PickupLatitude": 40.7698,
-										"HackneyLicenseID": 30912,
-										"PassengerCount": 1,
-										"PaymentType": "CRD",
-										"FareAmount": 14,
-										"MedallionID": 573
-									}
-								],
-								"schema": {
-									"DateID": "int",
-									"MedallionID": "int",
-									"HackneyLicenseID": "int",
-									"PickupTimeID": "int",
-									"DropoffTimeID": "int",
-									"PickupGeographyID": "int",
-									"DropoffGeographyID": "int",
-									"PickupLatitude": "double",
-									"PickupLongitude": "double",
-									"PickupLatLong": "string",
-									"DropoffLatitude": "double",
-									"DropoffLongitude": "double",
-									"DropoffLatLong": "string",
-									"PassengerCount": "int",
-									"TripDurationSeconds": "int",
-									"TripDistanceMiles": "double",
-									"PaymentType": "string",
-									"FareAmount": "decimal",
-									"SurchargeAmount": "decimal",
-									"TaxAmount": "decimal",
-									"TipAmount": "decimal",
-									"TollsAmount": "decimal",
-									"TotalAmount": "decimal"
-								}
-							},
-							"isSummary": false,
-							"language": "scala"
-						},
-						"persist_state": {
-							"view": {
-								"type": "details",
-								"chartOptions": {
-									"chartType": "bar",
-									"aggregationType": "sum",
-									"categoryFieldKeys": [
-										"MedallionID"
-									],
-									"seriesFieldKeys": [
-										"DateID"
-									],
-									"isStacked": false
-								}
-							}
-						}
-					}
-				}
+				"version": "0.1"
 			},
 			"kernelspec": {
 				"name": "synapse_pyspark",
@@ -367,6 +63,87 @@
 					"display(df.limit(10))"
 				],
 				"execution_count": 1
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					},
+					"collapsed": true
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"spark.sql(\"CREATE DATABASE IF NOT EXISTS nyctaxi\")\r\n",
+					"df.write.mode(\"overwrite\").saveAsTable(\"nyctaxi.trip\")"
+				],
+				"execution_count": 1
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					},
+					"collapsed": true
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"df = spark.sql(\"SELECT * FROM nyctaxi.trip\") \r\n",
+					"display(df)"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					},
+					"collapsed": true
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"df = spark.sql(\"\"\"\r\n",
+					"   SELECT PassengerCount,\r\n",
+					"       SUM(TripDistanceMiles) as SumTripDistance,\r\n",
+					"       AVG(TripDistanceMiles) as AvgTripDistance\r\n",
+					"   FROM nyctaxi.trip\r\n",
+					"   WHERE TripDistanceMiles > 0 AND PassengerCount > 0\r\n",
+					"   GROUP BY PassengerCount\r\n",
+					"   ORDER BY PassengerCount\r\n",
+					"\"\"\") \r\n",
+					"display(df)\r\n",
+					"df.write.saveAsTable(\"nyctaxi.passengercountstats\")"
+				],
+				"execution_count": null
 			}
 		]
 	}
