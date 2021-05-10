@@ -70,6 +70,39 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/Spark pool01')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Notebook NYC Taxi",
+						"type": "SynapseNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebook": {
+								"referenceName": "Notebook NYC Taxi",
+								"type": "NotebookReference"
+							},
+							"snapshot": true
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/notebooks/Notebook NYC Taxi')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/CustomerSource')]",
 			"type": "Microsoft.Synapse/workspaces/datasets",
 			"apiVersion": "2019-06-01-preview",
@@ -508,6 +541,90 @@
 						],
 						"outputs": [],
 						"execution_count": 1
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"microsoft": {
+								"language": "python"
+							},
+							"collapsed": true
+						},
+						"source": [
+							"%%pyspark\r\n",
+							"spark.sql(\"CREATE DATABASE IF NOT EXISTS nyctaxi\")\r\n",
+							"df.write.mode(\"overwrite\").saveAsTable(\"nyctaxi.trip\")"
+						],
+						"outputs": [],
+						"execution_count": 1
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"microsoft": {
+								"language": "python"
+							},
+							"collapsed": true
+						},
+						"source": [
+							"%%pyspark\r\n",
+							"df = spark.sql(\"SELECT * FROM nyctaxi.trip\") \r\n",
+							"display(df)"
+						],
+						"outputs": [],
+						"execution_count": null
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							},
+							"microsoft": {
+								"language": "python"
+							},
+							"collapsed": true
+						},
+						"source": [
+							"%%pyspark\r\n",
+							"df = spark.sql(\"\"\"\r\n",
+							"   SELECT PassengerCount,\r\n",
+							"       SUM(TripDistanceMiles) as SumTripDistance,\r\n",
+							"       AVG(TripDistanceMiles) as AvgTripDistance\r\n",
+							"   FROM nyctaxi.trip\r\n",
+							"   WHERE TripDistanceMiles > 0 AND PassengerCount > 0\r\n",
+							"   GROUP BY PassengerCount\r\n",
+							"   ORDER BY PassengerCount\r\n",
+							"\"\"\") \r\n",
+							"display(df)\r\n",
+							"df.write.saveAsTable(\"nyctaxi.passengercountstats\")"
+						],
+						"outputs": [],
+						"execution_count": null
 					}
 				]
 			},
