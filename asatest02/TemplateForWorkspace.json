@@ -473,6 +473,26 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 5')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [PassengerCount]\n,[SumTripDistance]\n,[AvgTripDistance]\n FROM [nyctaxi].[dbo].[passengercountstats]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"poolName": "Built-in",
+						"databaseName": "nyctaxi"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/Notebook NYC Taxi')]",
 			"type": "Microsoft.Synapse/workspaces/notebooks",
 			"apiVersion": "2019-06-01-preview",
@@ -565,7 +585,7 @@
 							"df.write.mode(\"overwrite\").saveAsTable(\"nyctaxi.trip\")"
 						],
 						"outputs": [],
-						"execution_count": 1
+						"execution_count": 2
 					},
 					{
 						"cell_type": "code",
@@ -582,7 +602,7 @@
 							"microsoft": {
 								"language": "python"
 							},
-							"collapsed": true
+							"collapsed": false
 						},
 						"source": [
 							"%%pyspark\r\n",
@@ -590,7 +610,7 @@
 							"display(df)"
 						],
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 3
 					},
 					{
 						"cell_type": "code",
@@ -621,10 +641,10 @@
 							"   ORDER BY PassengerCount\r\n",
 							"\"\"\") \r\n",
 							"display(df)\r\n",
-							"df.write.saveAsTable(\"nyctaxi.passengercountstats\")"
+							"#df.write.mode(SaveMode.Overwrite).saveAsTable(\"nyctaxi.passengercountstats\")"
 						],
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 5
 					}
 				]
 			},
