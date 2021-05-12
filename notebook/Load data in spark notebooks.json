@@ -24,7 +24,7 @@
 			"synapse_widget": {
 				"version": "0.1",
 				"state": {
-					"62707857-e4fd-4e96-9c39-31c75c19f98d": {
+					"becea5e0-438d-4342-b92a-8605c889b69a": {
 						"type": "Synapse.DataFrame",
 						"sync_state": {
 							"table": {
@@ -313,20 +313,20 @@
 							"view": {
 								"type": "details",
 								"chartOptions": {
-									"chartType": "column",
+									"chartType": "bar",
 									"aggregationType": "sum",
 									"categoryFieldKeys": [
-										"PaymentType"
+										"MedallionID"
 									],
 									"seriesFieldKeys": [
-										"TotalAmount"
+										"DateID"
 									],
 									"isStacked": false
 								}
 							}
 						}
 					},
-					"8100188f-d24a-4999-9525-3ef7a67cf5a1": {
+					"4b3c58f8-f800-405e-9d68-cd4b2d0f4b3a": {
 						"type": "Synapse.DataFrame",
 						"sync_state": {
 							"table": {
@@ -884,6 +884,504 @@
 								}
 							}
 						}
+					},
+					"dfb29004-6f6a-4a5c-9b49-4b9a1fd49b5a": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"DateID": 20131219,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 88255.75
+									},
+									{
+										"DateID": 20131218,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 86479.27
+									},
+									{
+										"DateID": 20131220,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 85998.56
+									},
+									{
+										"DateID": 20131221,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 61078.2
+									},
+									{
+										"DateID": 20131229,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 54770.92
+									},
+									{
+										"DateID": 20131220,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 51564.75
+									},
+									{
+										"DateID": 20131223,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 49558.41
+									},
+									{
+										"DateID": 20131219,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 49503.96
+									},
+									{
+										"DateID": 20131222,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 49428.69
+									},
+									{
+										"DateID": 20131221,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 48749.31
+									},
+									{
+										"DateID": 20131229,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 48735.5
+									},
+									{
+										"DateID": 20131227,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 48647.42
+									},
+									{
+										"DateID": 20131231,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 48611.43
+									},
+									{
+										"DateID": 20131231,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 47720.3
+									},
+									{
+										"DateID": 20131228,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 46986.03
+									},
+									{
+										"DateID": 20131218,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 45860.06
+									},
+									{
+										"DateID": 20131230,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 45715.63
+									},
+									{
+										"DateID": 20131224,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 45436.76
+									},
+									{
+										"DateID": 20131230,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 45358.92
+									},
+									{
+										"DateID": 20131224,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 45203.9
+									},
+									{
+										"DateID": 20131222,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 43856.89
+									},
+									{
+										"DateID": 20131228,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 43495.35
+									},
+									{
+										"DateID": 20131223,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 43210.7
+									},
+									{
+										"DateID": 20131217,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 39894.86
+									},
+									{
+										"DateID": 20131225,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 38352.94
+									},
+									{
+										"DateID": 20131227,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 37806.13
+									},
+									{
+										"DateID": 20131226,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 37695.26
+									},
+									{
+										"DateID": 20131226,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 33196.46
+									},
+									{
+										"DateID": 20131225,
+										"PaymentType": "CRD",
+										"(sum)TotalAmount": 29885.69
+									},
+									{
+										"DateID": 20131217,
+										"PaymentType": "CSH",
+										"(sum)TotalAmount": 17735.16
+									},
+									{
+										"DateID": 20131223,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 423.17
+									},
+									{
+										"DateID": 20131230,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 408.45
+									},
+									{
+										"DateID": 20131218,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 380.85
+									},
+									{
+										"DateID": 20131219,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 353.67
+									},
+									{
+										"DateID": 20131231,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 291.86
+									},
+									{
+										"DateID": 20131221,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 290
+									},
+									{
+										"DateID": 20131227,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 284.9
+									},
+									{
+										"DateID": 20131220,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 255.33
+									},
+									{
+										"DateID": 20131224,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 250.11
+									},
+									{
+										"DateID": 20131229,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 229.16
+									},
+									{
+										"DateID": 20131228,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 224.8
+									},
+									{
+										"DateID": 20131221,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 207.66
+									},
+									{
+										"DateID": 20131226,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 182.3
+									},
+									{
+										"DateID": 20131225,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 174.93
+									},
+									{
+										"DateID": 20131222,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 170.5
+									},
+									{
+										"DateID": 20131222,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 168.33
+									},
+									{
+										"DateID": 20131227,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 151.99
+									},
+									{
+										"DateID": 20131218,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 149.5
+									},
+									{
+										"DateID": 20131220,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 143.83
+									},
+									{
+										"DateID": 20131223,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 132.33
+									},
+									{
+										"DateID": 20131219,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 128.33
+									},
+									{
+										"DateID": 20131217,
+										"PaymentType": "UNK",
+										"(sum)TotalAmount": 119.92
+									},
+									{
+										"DateID": 20131228,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 107.16
+									},
+									{
+										"DateID": 20131224,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 106
+									},
+									{
+										"DateID": 20131225,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 96.83
+									},
+									{
+										"DateID": 20131221,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 76.33
+									},
+									{
+										"DateID": 20131231,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 70
+									},
+									{
+										"DateID": 20131223,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 64
+									},
+									{
+										"DateID": 20131229,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 64
+									},
+									{
+										"DateID": 20131218,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 53
+									},
+									{
+										"DateID": 20131228,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 51
+									},
+									{
+										"DateID": 20131220,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 50.83
+									},
+									{
+										"DateID": 20131222,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 49
+									},
+									{
+										"DateID": 20131230,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 48.5
+									},
+									{
+										"DateID": 20131230,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 41
+									},
+									{
+										"DateID": 20131231,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 39.5
+									},
+									{
+										"DateID": 20131219,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 39
+									},
+									{
+										"DateID": 20131217,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 30
+									},
+									{
+										"DateID": 20131226,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 22.83
+									},
+									{
+										"DateID": 20131217,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 22.5
+									},
+									{
+										"DateID": 20131224,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 16
+									},
+									{
+										"DateID": 20131229,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 16
+									},
+									{
+										"DateID": 20131227,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 11
+									},
+									{
+										"DateID": 20131226,
+										"PaymentType": "NOC",
+										"(sum)TotalAmount": 10
+									},
+									{
+										"DateID": 20131225,
+										"PaymentType": "DIS",
+										"(sum)TotalAmount": 3
+									}
+								],
+								"schema": {
+									"DateID": "int",
+									"PaymentType": "string",
+									"(sum)TotalAmount": "decimal"
+								}
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"PaymentType"
+									],
+									"seriesFieldKeys": [
+										"DateID"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					},
+					"81da524a-f077-4e92-96bd-8d8fde95ce8a": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"DateId": 20131217,
+										"totalAmount": 57802.44
+									},
+									{
+										"DateId": 20131218,
+										"totalAmount": 132922.68
+									},
+									{
+										"DateId": 20131219,
+										"totalAmount": 138280.71
+									},
+									{
+										"DateId": 20131220,
+										"totalAmount": 138013.3
+									},
+									{
+										"DateId": 20131221,
+										"totalAmount": 110401.5
+									},
+									{
+										"DateId": 20131222,
+										"totalAmount": 93673.41
+									},
+									{
+										"DateId": 20131223,
+										"totalAmount": 93388.61
+									},
+									{
+										"DateId": 20131224,
+										"totalAmount": 91012.77
+									},
+									{
+										"DateId": 20131225,
+										"totalAmount": 68513.39
+									},
+									{
+										"DateId": 20131226,
+										"totalAmount": 71106.85
+									},
+									{
+										"DateId": 20131227,
+										"totalAmount": 86901.44
+									},
+									{
+										"DateId": 20131228,
+										"totalAmount": 90864.34
+									},
+									{
+										"DateId": 20131229,
+										"totalAmount": 103815.58
+									},
+									{
+										"DateId": 20131230,
+										"totalAmount": 91572.5
+									},
+									{
+										"DateId": 20131231,
+										"totalAmount": 96733.09
+									}
+								],
+								"schema": {
+									"DateId": "int",
+									"totalAmount": "decimal"
+								}
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"totalAmount"
+									],
+									"seriesFieldKeys": [
+										"DateId"
+									],
+									"isStacked": false
+								}
+							}
+						}
 					}
 				}
 			},
@@ -925,7 +1423,7 @@
 					"df = spark.read.load('abfss://myworkspace@adltest02.dfs.core.windows.net/NYCTripSmall.parquet', format='parquet')\r\n",
 					"display(df.limit(10))"
 				],
-				"execution_count": 13
+				"execution_count": 3
 			},
 			{
 				"cell_type": "code",
@@ -944,7 +1442,7 @@
 				"source": [
 					"df.printSchema()"
 				],
-				"execution_count": 15
+				"execution_count": 4
 			},
 			{
 				"cell_type": "code",
@@ -973,7 +1471,119 @@
 					"    .orderBy(\"DateID\"))\r\n",
 					"display(profitByDateProduct.limit(100))"
 				],
-				"execution_count": 17
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"# create a view called user_profiles\r\n",
+					"profitByDateProduct.createOrReplaceTempView(\"NYCTripSmall\")"
+				],
+				"execution_count": 6
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "sparksql"
+					},
+					"collapsed": false
+				},
+				"source": [
+					"%%sql\r\n",
+					"\r\n",
+					"SELECT * FROM NYCTripSmall LIMIT 100"
+				],
+				"execution_count": 7
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"topPurchases = (profitByDateProduct.select('DateID','PaymentType','(sum)TotalAmount')\r\n",
+					"    .orderBy('DateID'))\r\n",
+					"\r\n",
+					"topPurchases.show(100)"
+				],
+				"execution_count": 14
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"sortedTopPurchases = (topPurchases\r\n",
+					"    .orderBy( col(\"(sum)TotalAmount\").desc() ))\r\n",
+					"\r\n",
+					"display(sortedTopPurchases.limit(100))"
+				],
+				"execution_count": 15
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"groupedTopPurchases = (topPurchases.select(\"DateId\",\"(sum)TotalAmount\")\r\n",
+					"    .groupBy(\"DateId\")\r\n",
+					"    .agg(sum(\"(sum)TotalAmount\").alias(\"totalAmount\"))\r\n",
+					"    .orderBy(\"DateId\") )\r\n",
+					"\r\n",
+					"display(groupedTopPurchases.limit(100))"
+				],
+				"execution_count": 21
 			}
 		]
 	}
