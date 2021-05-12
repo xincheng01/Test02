@@ -1,0 +1,980 @@
+{
+	"name": "Load data in spark notebooks",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "Sparkpool01",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1",
+				"state": {
+					"62707857-e4fd-4e96-9c39-31c75c19f98d": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"TipAmount": 0,
+										"PickupTimeID": 63879,
+										"PickupLongitude": -73.9513,
+										"DropoffTimeID": 64392,
+										"TollsAmount": 0,
+										"TotalAmount": 9,
+										"PickupLatLong": "40.8124,-73.9513",
+										"TripDistanceMiles": 1.3,
+										"PickupGeographyID": 172348,
+										"DropoffGeographyID": 219532,
+										"TripDurationSeconds": 513,
+										"SurchargeAmount": 1,
+										"DateID": 20131231,
+										"DropoffLatLong": "40.7982,-73.9444",
+										"DropoffLongitude": -73.9444,
+										"TaxAmount": 0.5,
+										"DropoffLatitude": 40.7982,
+										"PickupLatitude": 40.8124,
+										"HackneyLicenseID": 35117,
+										"PassengerCount": 1,
+										"PaymentType": "CSH",
+										"FareAmount": 7.5,
+										"MedallionID": 10624
+									},
+									{
+										"TipAmount": 0,
+										"PickupTimeID": 61733,
+										"PickupLongitude": -73.9857,
+										"DropoffTimeID": 62114,
+										"TollsAmount": 0,
+										"TotalAmount": 8.5,
+										"PickupLatLong": "40.7352,-73.9857",
+										"TripDistanceMiles": 1.3,
+										"PickupGeographyID": 87083,
+										"DropoffGeographyID": 137768,
+										"TripDurationSeconds": 380,
+										"SurchargeAmount": 1,
+										"DateID": 20131231,
+										"DropoffLatLong": "40.751,-73.9789",
+										"DropoffLongitude": -73.9789,
+										"TaxAmount": 0.5,
+										"DropoffLatitude": 40.751,
+										"PickupLatitude": 40.7352,
+										"HackneyLicenseID": 11597,
+										"PassengerCount": 1,
+										"PaymentType": "CSH",
+										"FareAmount": 7,
+										"MedallionID": 7263
+									},
+									{
+										"TipAmount": 0,
+										"PickupTimeID": 59488,
+										"PickupLongitude": -73.9483,
+										"DropoffTimeID": 59815,
+										"TollsAmount": 0,
+										"TotalAmount": 7.5,
+										"PickupLatLong": "40.7699,-73.9483",
+										"TripDistanceMiles": 1,
+										"PickupGeographyID": 82160,
+										"DropoffGeographyID": 146431,
+										"TripDurationSeconds": 326,
+										"SurchargeAmount": 1,
+										"DateID": 20131231,
+										"DropoffLatLong": "40.763,-73.962",
+										"DropoffLongitude": -73.962,
+										"TaxAmount": 0.5,
+										"DropoffLatitude": 40.763,
+										"PickupLatitude": 40.7699,
+										"HackneyLicenseID": 5301,
+										"PassengerCount": 1,
+										"PaymentType": "CSH",
+										"FareAmount": 6,
+										"MedallionID": 1899
+									},
+									{
+										"TipAmount": 0,
+										"PickupTimeID": 69093,
+										"PickupLongitude": -73.9746,
+										"DropoffTimeID": 69548,
+										"TollsAmount": 0,
+										"TotalAmount": 8.5,
+										"PickupLatLong": "40.7507,-73.9746",
+										"TripDistanceMiles": 1,
+										"PickupGeographyID": 276342,
+										"DropoffGeographyID": 43408,
+										"TripDurationSeconds": 454,
+										"SurchargeAmount": 1,
+										"DateID": 20131231,
+										"DropoffLatLong": "40.7428,-73.9823",
+										"DropoffLongitude": -73.9823,
+										"TaxAmount": 0.5,
+										"DropoffLatitude": 40.7428,
+										"PickupLatitude": 40.7507,
+										"HackneyLicenseID": 28727,
+										"PassengerCount": 1,
+										"PaymentType": "CSH",
+										"FareAmount": 7,
+										"MedallionID": 9471
+									},
+									{
+										"TipAmount": 0,
+										"PickupTimeID": 51720,
+										"PickupLongitude": -74.0119,
+										"DropoffTimeID": 52440,
+										"TollsAmount": 0,
+										"TotalAmount": 20,
+										"PickupLatLong": "40.7138,-74.0119",
+										"TripDistanceMiles": 6.11,
+										"PickupGeographyID": 155260,
+										"DropoffGeographyID": 211054,
+										"TripDurationSeconds": 720,
+										"SurchargeAmount": 0,
+										"DateID": 20131231,
+										"DropoffLatLong": "40.7494,-73.9694",
+										"DropoffLongitude": -73.9694,
+										"TaxAmount": 0.5,
+										"DropoffLatitude": 40.7494,
+										"PickupLatitude": 40.7138,
+										"HackneyLicenseID": 16124,
+										"PassengerCount": 1,
+										"PaymentType": "CSH",
+										"FareAmount": 19.5,
+										"MedallionID": 2556
+									},
+									{
+										"TipAmount": 0,
+										"PickupTimeID": 31260,
+										"PickupLongitude": -73.9773,
+										"DropoffTimeID": 32100,
+										"TollsAmount": 0,
+										"TotalAmount": 12,
+										"PickupLatLong": "40.726,-73.9773",
+										"TripDistanceMiles": 2.16,
+										"PickupGeographyID": 263305,
+										"DropoffGeographyID": 80576,
+										"TripDurationSeconds": 840,
+										"SurchargeAmount": 0,
+										"DateID": 20131231,
+										"DropoffLatLong": "40.749,-73.9838",
+										"DropoffLongitude": -73.9838,
+										"TaxAmount": 0.5,
+										"DropoffLatitude": 40.749,
+										"PickupLatitude": 40.726,
+										"HackneyLicenseID": 33809,
+										"PassengerCount": 1,
+										"PaymentType": "CSH",
+										"FareAmount": 11.5,
+										"MedallionID": 1433
+									},
+									{
+										"TipAmount": 0,
+										"PickupTimeID": 18150,
+										"PickupLongitude": -74.008,
+										"DropoffTimeID": 20112,
+										"TollsAmount": 0,
+										"TotalAmount": 33,
+										"PickupLatLong": "40.7421,-74.008",
+										"TripDistanceMiles": 9.2,
+										"PickupGeographyID": 26661,
+										"DropoffGeographyID": 108578,
+										"TripDurationSeconds": 1962,
+										"SurchargeAmount": 0.5,
+										"DateID": 20131231,
+										"DropoffLatLong": "40.757,-73.8866",
+										"DropoffLongitude": -73.8866,
+										"TaxAmount": 0.5,
+										"DropoffLatitude": 40.757,
+										"PickupLatitude": 40.7421,
+										"HackneyLicenseID": 7842,
+										"PassengerCount": 1,
+										"PaymentType": "CSH",
+										"FareAmount": 32,
+										"MedallionID": 1486
+									},
+									{
+										"TipAmount": 0,
+										"PickupTimeID": 37020,
+										"PickupLongitude": -73.8637,
+										"DropoffTimeID": 38460,
+										"TollsAmount": 0,
+										"TotalAmount": 41,
+										"PickupLatLong": "40.7697,-73.8637",
+										"TripDistanceMiles": 14.78,
+										"PickupGeographyID": 147003,
+										"DropoffGeographyID": 70493,
+										"TripDurationSeconds": 1440,
+										"SurchargeAmount": 0,
+										"DateID": 20131231,
+										"DropoffLatLong": "40.6519,-74.0064",
+										"DropoffLongitude": -74.0064,
+										"TaxAmount": 0.5,
+										"DropoffLatitude": 40.6519,
+										"PickupLatitude": 40.7697,
+										"HackneyLicenseID": 36224,
+										"PassengerCount": 1,
+										"PaymentType": "CSH",
+										"FareAmount": 40.5,
+										"MedallionID": 7225
+									},
+									{
+										"TipAmount": 4.35,
+										"PickupTimeID": 64740,
+										"PickupLongitude": -74.0022,
+										"DropoffTimeID": 65700,
+										"TollsAmount": 0,
+										"TotalAmount": 19.35,
+										"PickupLatLong": "40.7263,-74.0022",
+										"TripDistanceMiles": 3.25,
+										"PickupGeographyID": 230937,
+										"DropoffGeographyID": 116813,
+										"TripDurationSeconds": 960,
+										"SurchargeAmount": 1,
+										"DateID": 20131231,
+										"DropoffLatLong": "40.7555,-73.9729",
+										"DropoffLongitude": -73.9729,
+										"TaxAmount": 0.5,
+										"DropoffLatitude": 40.7555,
+										"PickupLatitude": 40.7263,
+										"HackneyLicenseID": 35009,
+										"PassengerCount": 1,
+										"PaymentType": "CRD",
+										"FareAmount": 13.5,
+										"MedallionID": 8726
+									},
+									{
+										"TipAmount": 3.75,
+										"PickupTimeID": 66600,
+										"PickupLongitude": -73.9822,
+										"DropoffTimeID": 67260,
+										"TollsAmount": 0,
+										"TotalAmount": 19.25,
+										"PickupLatLong": "40.7698,-73.9822",
+										"TripDistanceMiles": 3.92,
+										"PickupGeographyID": 225983,
+										"DropoffGeographyID": 76697,
+										"TripDurationSeconds": 660,
+										"SurchargeAmount": 1,
+										"DateID": 20131231,
+										"DropoffLatLong": "40.8166,-73.9605",
+										"DropoffLongitude": -73.9605,
+										"TaxAmount": 0.5,
+										"DropoffLatitude": 40.8166,
+										"PickupLatitude": 40.7698,
+										"HackneyLicenseID": 30912,
+										"PassengerCount": 1,
+										"PaymentType": "CRD",
+										"FareAmount": 14,
+										"MedallionID": 573
+									}
+								],
+								"schema": {
+									"DateID": "int",
+									"MedallionID": "int",
+									"HackneyLicenseID": "int",
+									"PickupTimeID": "int",
+									"DropoffTimeID": "int",
+									"PickupGeographyID": "int",
+									"DropoffGeographyID": "int",
+									"PickupLatitude": "double",
+									"PickupLongitude": "double",
+									"PickupLatLong": "string",
+									"DropoffLatitude": "double",
+									"DropoffLongitude": "double",
+									"DropoffLatLong": "string",
+									"PassengerCount": "int",
+									"TripDurationSeconds": "int",
+									"TripDistanceMiles": "double",
+									"PaymentType": "string",
+									"FareAmount": "decimal",
+									"SurchargeAmount": "decimal",
+									"TaxAmount": "decimal",
+									"TipAmount": "decimal",
+									"TollsAmount": "decimal",
+									"TotalAmount": "decimal"
+								}
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "column",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"PaymentType"
+									],
+									"seriesFieldKeys": [
+										"TotalAmount"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					},
+					"8100188f-d24a-4999-9525-3ef7a67cf5a1": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"(sum)TotalAmount": 39894.86,
+										"DateID": 20131217,
+										"(sum)PassengerCount": 3904,
+										"(avg)PassengerCount": 1.5685,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 17735.16,
+										"DateID": 20131217,
+										"(sum)PassengerCount": 2521,
+										"(avg)PassengerCount": 1.6919,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 119.92,
+										"DateID": 20131217,
+										"(sum)PassengerCount": 13,
+										"(avg)PassengerCount": 1.625,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 30,
+										"DateID": 20131217,
+										"(sum)PassengerCount": 3,
+										"(avg)PassengerCount": 1,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 22.5,
+										"DateID": 20131217,
+										"(sum)PassengerCount": 2,
+										"(avg)PassengerCount": 1,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 86479.27,
+										"DateID": 20131218,
+										"(sum)PassengerCount": 7714,
+										"(avg)PassengerCount": 1.6071,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 45860.06,
+										"DateID": 20131218,
+										"(sum)PassengerCount": 6415,
+										"(avg)PassengerCount": 1.8498,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 380.85,
+										"DateID": 20131218,
+										"(sum)PassengerCount": 51,
+										"(avg)PassengerCount": 1.7,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 149.5,
+										"DateID": 20131218,
+										"(sum)PassengerCount": 9,
+										"(avg)PassengerCount": 1.2857,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 53,
+										"DateID": 20131218,
+										"(sum)PassengerCount": 3,
+										"(avg)PassengerCount": 1.5,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 88255.75,
+										"DateID": 20131219,
+										"(sum)PassengerCount": 7805,
+										"(avg)PassengerCount": 1.6037,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 39,
+										"DateID": 20131219,
+										"(sum)PassengerCount": 4,
+										"(avg)PassengerCount": 1.3333,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 128.33,
+										"DateID": 20131219,
+										"(sum)PassengerCount": 19,
+										"(avg)PassengerCount": 1.3571,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 49503.96,
+										"DateID": 20131219,
+										"(sum)PassengerCount": 6739,
+										"(avg)PassengerCount": 1.8352,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 353.67,
+										"DateID": 20131219,
+										"(sum)PassengerCount": 39,
+										"(avg)PassengerCount": 1.8571,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 85998.56,
+										"DateID": 20131220,
+										"(sum)PassengerCount": 7491,
+										"(avg)PassengerCount": 1.56,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 51564.75,
+										"DateID": 20131220,
+										"(sum)PassengerCount": 7222,
+										"(avg)PassengerCount": 1.8191,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 255.33,
+										"DateID": 20131220,
+										"(sum)PassengerCount": 37,
+										"(avg)PassengerCount": 1.9474,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 143.83,
+										"DateID": 20131220,
+										"(sum)PassengerCount": 19,
+										"(avg)PassengerCount": 1.3571,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 50.83,
+										"DateID": 20131220,
+										"(sum)PassengerCount": 3,
+										"(avg)PassengerCount": 1,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 61078.2,
+										"DateID": 20131221,
+										"(sum)PassengerCount": 5873,
+										"(avg)PassengerCount": 1.6007,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 48749.31,
+										"DateID": 20131221,
+										"(sum)PassengerCount": 7730,
+										"(avg)PassengerCount": 1.9545,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 290,
+										"DateID": 20131221,
+										"(sum)PassengerCount": 27,
+										"(avg)PassengerCount": 1.2857,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 207.66,
+										"DateID": 20131221,
+										"(sum)PassengerCount": 38,
+										"(avg)PassengerCount": 2.7143,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 76.33,
+										"DateID": 20131221,
+										"(sum)PassengerCount": 8,
+										"(avg)PassengerCount": 1.6,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 43856.89,
+										"DateID": 20131222,
+										"(sum)PassengerCount": 6571,
+										"(avg)PassengerCount": 1.9592,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 49428.69,
+										"DateID": 20131222,
+										"(sum)PassengerCount": 4617,
+										"(avg)PassengerCount": 1.6436,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 49,
+										"DateID": 20131222,
+										"(sum)PassengerCount": 4,
+										"(avg)PassengerCount": 1.3333,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 170.5,
+										"DateID": 20131222,
+										"(sum)PassengerCount": 11,
+										"(avg)PassengerCount": 1.2222,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 168.33,
+										"DateID": 20131222,
+										"(sum)PassengerCount": 28,
+										"(avg)PassengerCount": 2.5455,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 43210.7,
+										"DateID": 20131223,
+										"(sum)PassengerCount": 6440,
+										"(avg)PassengerCount": 1.8786,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 49558.41,
+										"DateID": 20131223,
+										"(sum)PassengerCount": 4652,
+										"(avg)PassengerCount": 1.5637,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 423.17,
+										"DateID": 20131223,
+										"(sum)PassengerCount": 41,
+										"(avg)PassengerCount": 2.4118,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 64,
+										"DateID": 20131223,
+										"(sum)PassengerCount": 7,
+										"(avg)PassengerCount": 1.75,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 132.33,
+										"DateID": 20131223,
+										"(sum)PassengerCount": 11,
+										"(avg)PassengerCount": 1.2222,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 45436.76,
+										"DateID": 20131224,
+										"(sum)PassengerCount": 7484,
+										"(avg)PassengerCount": 1.9319,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 45203.9,
+										"DateID": 20131224,
+										"(sum)PassengerCount": 4706,
+										"(avg)PassengerCount": 1.6312,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 250.11,
+										"DateID": 20131224,
+										"(sum)PassengerCount": 28,
+										"(avg)PassengerCount": 1.8667,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 106,
+										"DateID": 20131224,
+										"(sum)PassengerCount": 13,
+										"(avg)PassengerCount": 1.1818,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 16,
+										"DateID": 20131224,
+										"(sum)PassengerCount": 4,
+										"(avg)PassengerCount": 1,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 29885.69,
+										"DateID": 20131225,
+										"(sum)PassengerCount": 3044,
+										"(avg)PassengerCount": 1.778,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 38352.94,
+										"DateID": 20131225,
+										"(sum)PassengerCount": 5933,
+										"(avg)PassengerCount": 1.9491,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 174.93,
+										"DateID": 20131225,
+										"(sum)PassengerCount": 19,
+										"(avg)PassengerCount": 1.7273,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 96.83,
+										"DateID": 20131225,
+										"(sum)PassengerCount": 11,
+										"(avg)PassengerCount": 1.375,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 3,
+										"DateID": 20131225,
+										"(sum)PassengerCount": 1,
+										"(avg)PassengerCount": 1,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 33196.46,
+										"DateID": 20131226,
+										"(sum)PassengerCount": 3369,
+										"(avg)PassengerCount": 1.6563,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 37695.26,
+										"DateID": 20131226,
+										"(sum)PassengerCount": 5973,
+										"(avg)PassengerCount": 1.9286,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 182.3,
+										"DateID": 20131226,
+										"(sum)PassengerCount": 26,
+										"(avg)PassengerCount": 1.8571,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 22.83,
+										"DateID": 20131226,
+										"(sum)PassengerCount": 3,
+										"(avg)PassengerCount": 1,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 10,
+										"DateID": 20131226,
+										"(sum)PassengerCount": 1,
+										"(avg)PassengerCount": 1,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 48647.42,
+										"DateID": 20131227,
+										"(sum)PassengerCount": 7586,
+										"(avg)PassengerCount": 1.9689,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 37806.13,
+										"DateID": 20131227,
+										"(sum)PassengerCount": 3798,
+										"(avg)PassengerCount": 1.6328,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 151.99,
+										"DateID": 20131227,
+										"(sum)PassengerCount": 9,
+										"(avg)PassengerCount": 1.2857,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 284.9,
+										"DateID": 20131227,
+										"(sum)PassengerCount": 20,
+										"(avg)PassengerCount": 1.25,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 11,
+										"DateID": 20131227,
+										"(sum)PassengerCount": 7,
+										"(avg)PassengerCount": 2.3333,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 43495.35,
+										"DateID": 20131228,
+										"(sum)PassengerCount": 4289,
+										"(avg)PassengerCount": 1.6754,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 46986.03,
+										"DateID": 20131228,
+										"(sum)PassengerCount": 6988,
+										"(avg)PassengerCount": 1.9818,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 224.8,
+										"DateID": 20131228,
+										"(sum)PassengerCount": 28,
+										"(avg)PassengerCount": 2.8,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 51,
+										"DateID": 20131228,
+										"(sum)PassengerCount": 8,
+										"(avg)PassengerCount": 2,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 107.16,
+										"DateID": 20131228,
+										"(sum)PassengerCount": 5,
+										"(avg)PassengerCount": 1.25,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 48735.5,
+										"DateID": 20131229,
+										"(sum)PassengerCount": 7704,
+										"(avg)PassengerCount": 1.9835,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 54770.92,
+										"DateID": 20131229,
+										"(sum)PassengerCount": 5404,
+										"(avg)PassengerCount": 1.7188,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 229.16,
+										"DateID": 20131229,
+										"(sum)PassengerCount": 37,
+										"(avg)PassengerCount": 3.3636,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 64,
+										"DateID": 20131229,
+										"(sum)PassengerCount": 9,
+										"(avg)PassengerCount": 1.125,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 16,
+										"DateID": 20131229,
+										"(sum)PassengerCount": 1,
+										"(avg)PassengerCount": 1,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 45358.92,
+										"DateID": 20131230,
+										"(sum)PassengerCount": 4668,
+										"(avg)PassengerCount": 1.6141,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 45715.63,
+										"DateID": 20131230,
+										"(sum)PassengerCount": 6868,
+										"(avg)PassengerCount": 1.9147,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 408.45,
+										"DateID": 20131230,
+										"(sum)PassengerCount": 53,
+										"(avg)PassengerCount": 2.5238,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 48.5,
+										"DateID": 20131230,
+										"(sum)PassengerCount": 11,
+										"(avg)PassengerCount": 1,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 41,
+										"DateID": 20131230,
+										"(sum)PassengerCount": 2,
+										"(avg)PassengerCount": 1,
+										"PaymentType": "DIS"
+									},
+									{
+										"(sum)TotalAmount": 47720.3,
+										"DateID": 20131231,
+										"(sum)PassengerCount": 7900,
+										"(avg)PassengerCount": 1.9147,
+										"PaymentType": "CSH"
+									},
+									{
+										"(sum)TotalAmount": 48611.43,
+										"DateID": 20131231,
+										"(sum)PassengerCount": 5330,
+										"(avg)PassengerCount": 1.6206,
+										"PaymentType": "CRD"
+									},
+									{
+										"(sum)TotalAmount": 291.86,
+										"DateID": 20131231,
+										"(sum)PassengerCount": 38,
+										"(avg)PassengerCount": 2.1111,
+										"PaymentType": "UNK"
+									},
+									{
+										"(sum)TotalAmount": 39.5,
+										"DateID": 20131231,
+										"(sum)PassengerCount": 10,
+										"(avg)PassengerCount": 1,
+										"PaymentType": "NOC"
+									},
+									{
+										"(sum)TotalAmount": 70,
+										"DateID": 20131231,
+										"(sum)PassengerCount": 10,
+										"(avg)PassengerCount": 1.6667,
+										"PaymentType": "DIS"
+									}
+								],
+								"schema": {
+									"DateID": "int",
+									"PaymentType": "string",
+									"(sum)TotalAmount": "decimal",
+									"(avg)PassengerCount": "double",
+									"(sum)PassengerCount": "bigint"
+								}
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"PaymentType"
+									],
+									"seriesFieldKeys": [
+										"DateID"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					}
+				}
+			},
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/8759debb-3921-4c79-904d-c0e86b64d530/resourceGroups/zxctest01/providers/Microsoft.Synapse/workspaces/asatest02/bigDataPools/Sparkpool01",
+				"name": "Sparkpool01",
+				"type": "Spark",
+				"endpoint": "https://asatest02.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/Sparkpool01",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"microsoft": {
+						"language": "python"
+					},
+					"collapsed": false
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"df = spark.read.load('abfss://myworkspace@adltest02.dfs.core.windows.net/NYCTripSmall.parquet', format='parquet')\r\n",
+					"display(df.limit(10))"
+				],
+				"execution_count": 13
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"df.printSchema()"
+				],
+				"execution_count": 15
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": false
+				},
+				"source": [
+					"from pyspark.sql import SparkSession\r\n",
+					"from pyspark.sql.types import *\r\n",
+					"from pyspark.sql.functions import *\r\n",
+					"\r\n",
+					"profitByDateProduct = (df.groupBy(\"DateID\",\"PaymentType\")\r\n",
+					"    .agg(\r\n",
+					"        sum(\"TotalAmount\").alias(\"(sum)TotalAmount\"),\r\n",
+					"        round(avg(\"PassengerCount\"), 4).alias(\"(avg)PassengerCount\"),\r\n",
+					"        sum(\"PassengerCount\").alias(\"(sum)PassengerCount\"))\r\n",
+					"    .orderBy(\"DateID\"))\r\n",
+					"display(profitByDateProduct.limit(100))"
+				],
+				"execution_count": 17
+			}
+		]
+	}
+}
