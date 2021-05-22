@@ -1,0 +1,148 @@
+{
+	"name": "Date",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "DateID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "DateBKey",
+				"type": "char"
+			},
+			{
+				"name": "DayOfMonth",
+				"type": "varchar"
+			},
+			{
+				"name": "DaySuffix",
+				"type": "varchar"
+			},
+			{
+				"name": "DayName",
+				"type": "varchar"
+			},
+			{
+				"name": "DayOfWeek",
+				"type": "char"
+			},
+			{
+				"name": "DayOfWeekInMonth",
+				"type": "varchar"
+			},
+			{
+				"name": "DayOfWeekInYear",
+				"type": "varchar"
+			},
+			{
+				"name": "DayOfQuarter",
+				"type": "varchar"
+			},
+			{
+				"name": "DayOfYear",
+				"type": "varchar"
+			},
+			{
+				"name": "WeekOfMonth",
+				"type": "varchar"
+			},
+			{
+				"name": "WeekOfQuarter",
+				"type": "varchar"
+			},
+			{
+				"name": "WeekOfYear",
+				"type": "varchar"
+			},
+			{
+				"name": "Month",
+				"type": "varchar"
+			},
+			{
+				"name": "MonthName",
+				"type": "varchar"
+			},
+			{
+				"name": "MonthOfQuarter",
+				"type": "varchar"
+			},
+			{
+				"name": "Quarter",
+				"type": "char"
+			},
+			{
+				"name": "QuarterName",
+				"type": "varchar"
+			},
+			{
+				"name": "Year",
+				"type": "char"
+			},
+			{
+				"name": "YearName",
+				"type": "char"
+			},
+			{
+				"name": "MonthYear",
+				"type": "char"
+			},
+			{
+				"name": "MMYYYY",
+				"type": "char"
+			},
+			{
+				"name": "FirstDayOfMonth",
+				"type": "date"
+			},
+			{
+				"name": "LastDayOfMonth",
+				"type": "date"
+			},
+			{
+				"name": "FirstDayOfQuarter",
+				"type": "date"
+			},
+			{
+				"name": "LastDayOfQuarter",
+				"type": "date"
+			},
+			{
+				"name": "FirstDayOfYear",
+				"type": "date"
+			},
+			{
+				"name": "LastDayOfYear",
+				"type": "date"
+			},
+			{
+				"name": "IsHolidayUSA",
+				"type": "bit"
+			},
+			{
+				"name": "IsWeekday",
+				"type": "bit"
+			},
+			{
+				"name": "HolidayUSA",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "nyt",
+			"table": "Date"
+		}
+	}
+}

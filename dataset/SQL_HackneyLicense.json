@@ -1,0 +1,30 @@
+{
+	"name": "SQL_HackneyLicense",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "HackneyLicenseID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "HackneyLicenseBKey",
+				"type": "varchar"
+			},
+			{
+				"name": "HackneyLicenseCode",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "nyt",
+			"table": "HackneyLicense"
+		}
+	}
+}

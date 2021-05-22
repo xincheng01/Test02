@@ -1,0 +1,59 @@
+{
+	"name": "Time",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "TimeID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TimeBKey",
+				"type": "varchar"
+			},
+			{
+				"name": "HourNumber",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "MinuteNumber",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "SecondNumber",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "TimeInSecond",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "HourlyBucket",
+				"type": "varchar"
+			},
+			{
+				"name": "DayTimeBucketGroupKey",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DayTimeBucket",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "nyt",
+			"table": "Time"
+		}
+	}
+}

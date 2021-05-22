@@ -1,0 +1,30 @@
+{
+	"name": "HackneyLicense",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "HackneyLicenseID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "HackneyLicenseBKey",
+				"type": "varchar"
+			},
+			{
+				"name": "HackneyLicenseCode",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "nyt",
+			"table": "HackneyLicense"
+		}
+	}
+}

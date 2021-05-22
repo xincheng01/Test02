@@ -1,0 +1,30 @@
+{
+	"name": "SQL_Medallion",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "MedallionID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MedallionBKey",
+				"type": "varchar"
+			},
+			{
+				"name": "MedallionCode",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "nyt",
+			"table": "Medallion"
+		}
+	}
+}

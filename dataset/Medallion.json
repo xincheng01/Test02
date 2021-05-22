@@ -1,0 +1,30 @@
+{
+	"name": "Medallion",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "MedallionID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MedallionBKey",
+				"type": "varchar"
+			},
+			{
+				"name": "MedallionCode",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "nyt",
+			"table": "Medallion"
+		}
+	}
+}
