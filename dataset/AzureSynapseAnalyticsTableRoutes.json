@@ -1,0 +1,54 @@
+{
+	"name": "AzureSynapseAnalyticsTableRoutes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Airline",
+				"type": "varchar"
+			},
+			{
+				"name": "Airline_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Source_airport",
+				"type": "varchar"
+			},
+			{
+				"name": "Source_airport_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Destination_airport",
+				"type": "varchar"
+			},
+			{
+				"name": "Destination_airport_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "Codeshare",
+				"type": "varchar"
+			},
+			{
+				"name": "Stops",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Equipment",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "ADFCookbook",
+			"table": "Routes"
+		}
+	}
+}
